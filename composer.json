@@ -1,0 +1,34 @@
+{
+    "name": "antonyz89/yii2-templates",
+    "description": "minor changes in model/crud templates",
+    "keywords": [
+        "antonyz89",
+        "yii2",
+        "extension",
+        "widget",
+        "template",
+        "templates",
+        "yii2-template",
+        "yii2 template"
+    ],
+    "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/antonyz89/yii2-template/issues",
+        "source": "https://github.com/antonyz89/yii2-template"
+    },
+    "authors": [
+        {
+            "name": "Antony Gabriel"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "^2.0.5",
+        "dmstr/yii2-adminlte-asset": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "antonyz89\\yii2-templates\\": "src"
+        }
+    }
+}
