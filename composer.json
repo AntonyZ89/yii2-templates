@@ -28,7 +28,7 @@
     },
     "autoload": {
         "psr-4": {
-            "antonyz89\\yii2-templates\\": "src"
+            "antonyz89\\templates\\": "src"
         }
     }
 }

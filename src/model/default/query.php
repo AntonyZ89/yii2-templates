@@ -35,7 +35,7 @@ echo "<?php\n";
 ?>
 
 namespace <?= $generator->queryNs ?>;
-use common\models\db\ActiveQuery;
+use antonyz89\templates\db\ActiveQuery;
 
 /**
  * This is the ActiveQuery class for [[<?= $modelFullClassName ?>]].
