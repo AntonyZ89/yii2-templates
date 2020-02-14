@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models\db;
+namespace antonyz89\templates\db;
 
 use yii\db\ActiveQuery as ActiveQueryBase;
 use yii2mod\helpers\ArrayHelper;
