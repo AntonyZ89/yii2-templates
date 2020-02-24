@@ -7,5 +7,5 @@ function refresh() {
     $.pjax.reload({url: pathname + '?' + params, container});
 }
 
-$(search + ' input').on('keyup', refresh);
+$(search + ' input').on('keyup change', refresh);
 $(search + ' select').on('change', refresh);
