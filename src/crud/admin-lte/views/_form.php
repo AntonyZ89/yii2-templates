@@ -17,13 +17,13 @@ echo "<?php\n";
 ?>
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\form\ActiveForm;
 use yii\web\View;
 use <?= ltrim($generator->modelClass, '\\').";\n" ?>
 
 /* @var $this View */
 /* @var $model <?= array_slice(explode('\\', $generator->modelClass), -1)[0] ?> */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form ActiveForm */
 ?>
 
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form <?= '<?= ' ?> Yii::$app->request->isAjax ? '' : 'box box-primary' ?>">
