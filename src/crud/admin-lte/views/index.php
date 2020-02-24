@@ -8,6 +8,8 @@ use yii\helpers\StringHelper;
 
 $urlParams = $generator->generateUrlParams();
 $nameAttribute = $generator->getNameAttribute();
+$basename = StringHelper::basename($generator->modelClass);
+$camel2id = Inflector::camel2id($basename);
 
 echo "<?php\n";
 ?>
@@ -16,13 +18,12 @@ use kartik\export\ExportMenu;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use <?= $generator->indexWidgetType === 'grid' ? "kartik\\grid\\GridView" : "yii\\widgets\\ListView" ?>;
-<?= $generator->enablePjax ? 'use yii\widgets\Pjax;' : '' ?>
 
 /* @var $this yii\web\View */
 <?= !empty($generator->searchModelClass) ? "/* @var \$searchModel " . ltrim($generator->searchModelClass, '\\') . " */\n" : '' ?>
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = <?= $generator->generateString(Inflector::pluralize(Inflector::camel2words(StringHelper::basename($generator->modelClass)))) ?>;
+$this->title = <?= $generator->generateString(Inflector::pluralize(Inflector::camel2words($basename))) ?>;
 $this->params['breadcrumbs'][] = $this->title;
 
 $columns = [
@@ -42,19 +43,20 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
 ];
 
 ?>
-<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-index box box-primary">
-<?= $generator->enablePjax ? "    <?php Pjax::begin(); ?>\n" : '' ?>
+<div class="<?= $camel2id ?>-index box box-primary">
     <div class="box-body no-padding">
 <?php if(!empty($generator->searchModelClass)): ?>
-<?= "        <?php " . ($generator->indexWidgetType === 'grid' ? "// " : "") ?>echo $this->render('_search', ['model' => $searchModel]); ?>
+<?= "        <?php " . (($generator->indexWidgetType === 'grid' && !$generator->enablePjax) ? "// " : "") ?>echo $this->render('_search', ['model' => $searchModel]); ?>
 <?php endif; ?>
 
 <?php if ($generator->indexWidgetType === 'grid'): ?>
         <?= "<?= " ?>GridView::widget([
             'dataProvider' => $dataProvider,
-            <?= !empty($generator->searchModelClass) ? "'filterModel' => \$searchModel,\n" : '' ?>
+            <?= !empty($generator->searchModelClass && !$generator->enablePjax) ? "'filterModel' => \$searchModel,\n" : '' ?>
+<?= $generator->enablePjax ? "'pjax' => true,\n" : '' ?>
             'summary' => false,
             'responsive' => false,
+            'hover' => true,
             'toolbar' => [
                 [
                     'content' => Html::a('<i class="fas fa-redo"></i> ' . Yii::t('app', 'Reset Grid'), [''], [
@@ -69,7 +71,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
             ],
             'panel' => [
                 'heading' => false,
-                'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> ' . Yii::t('app', <?= $generator->generateString('Create ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>), ['create'], ['class' => 'btn btn-success btn-flat']),
+                'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> ' . <?= $generator->generateString('Create ' . Inflector::camel2words($basename)) ?>, ['create'], ['class' => 'btn btn-success btn-flat'<?= $generator->enablePjax ? ", 'data-pjax' => 0" : '' ?>]),
                 'after' => false,
                 'footer' => false
             ],
@@ -89,7 +91,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
                 ]
             ])
         ]); ?>
-        <?php else: ?>
+    <?php else: ?>
         <?= "<?= " ?>ListView::widget([
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'item'],
@@ -97,7 +99,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
         return Html::a(Html::encode($model-><?= $nameAttribute ?>), ['view', <?= $urlParams ?>]);
         },
         ]) ?>
-        <?php endif; ?>
+    <?php endif; ?>
+
     </div>
-<?= $generator->enablePjax ? "    <?php Pjax::end(); ?>\n" : '' ?>
 </div>

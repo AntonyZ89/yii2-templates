@@ -24,7 +24,7 @@ use kartik\form\ActiveForm;
         'method' => 'get',
 <?php if ($generator->enablePjax): ?>
         'options' => [
-            'data-pjax' => 1
+            'data-pjax' => true
         ],
 <?php endif; ?>
     ]); ?>
@@ -35,11 +35,13 @@ foreach ($generator->getColumnNames() as $attribute) {
     echo "    <?= " . $generator->generateActiveSearchField($attribute) . " ?>\n\n";
 }
 ?>
+<?php if(!$generator->enablePjax): ?>
     <div class="form-group">
-        <?= "<?= " ?>Html::submitButton(<?= $generator->generateString('Pesquisar') ?>, ['class' => 'btn btn-primary']) ?>
-        <?= "<?= " ?>Html::a(<?= $generator->generateString('Limpar') ?>, ['index'], ['class' => 'btn btn-default']) ?>
+        <?= "<?= " ?>Html::submitButton(<?= $generator->generateString('Search') ?>, ['class' => 'btn btn-primary']) ?>
+        <?= "<?= " ?>Html::a(<?= $generator->generateString('Reset') ?>, ['index'], ['class' => 'btn btn-default']) ?>
     </div>
 
+<?php endif; ?>
     <?= "<?php " ?>ActiveForm::end(); ?>
 
 </div>

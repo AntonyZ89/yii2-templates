@@ -8,6 +8,8 @@ use yii\helpers\StringHelper;
 
 $urlParams = $generator->generateUrlParams();
 $nameAttribute = $generator->getNameAttribute();
+$basename = StringHelper::basename($generator->modelClass);
+$camel2id = Inflector::camel2id($basename);
 
 echo "<?php\n";
 ?>
@@ -20,7 +22,7 @@ use <?= $generator->indexWidgetType === 'grid' ? "kartik\\grid\\GridView" : "yii
 <?= !empty($generator->searchModelClass) ? "/* @var \$searchModel " . ltrim($generator->searchModelClass, '\\') . " */\n" : '' ?>
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = <?= $generator->generateString(Inflector::pluralize(Inflector::camel2words(StringHelper::basename($generator->modelClass)))) ?>;
+$this->title = <?= $generator->generateString(Inflector::pluralize(Inflector::camel2words($basename))) ?>;
 $this->params['breadcrumbs'][] = $this->title;
 
 $columns = [
@@ -41,23 +43,46 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
 
 ?>
 
-<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-index panel panel-default">
+<div class="<?= $camel2id ?>-index panel panel-default">
     <div class="panel-heading clearfix">
         <h2 class="no-margin pull-left"><?= "<?= " ?>Html::encode($this->title) ?></h2>
         <div class="pull-right">
-            <?= "<?= " ?>Html::a(<?= $generator->generateString('Criar ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>, ['create'], ['class' => 'btn btn-success']) ?>
+            <?= "<?= " ?>Html::a('<i class="glyphicon glyphicon-plus"></i> ' . <?= $generator->generateString('Create ' . Inflector::camel2words($basename)) ?>, ['create'], ['class' => 'btn btn-success']) ?>
         </div>
 <?php if(!empty($generator->searchModelClass)): ?>
     <?= "    <?php " . ($generator->indexWidgetType === 'grid' ? "// " : "") ?>echo $this->render('_search', ['model' => $searchModel]); ?>
 <?php endif; ?>
     </div>
     <div class="panel-body">
-<?= $generator->enablePjax ? "    <?php Pjax::begin(); ?>\n" : '' ?>
 <?php if ($generator->indexWidgetType === 'grid'): ?>
         <?= "<?= " ?>GridView::widget([
             'dataProvider' => $dataProvider,
-            <?= !empty($generator->searchModelClass) ? "'filterModel' => \$searchModel,\n\t\t\t'columns' => " : "'columns' => "; ?>
-ArrayHelper::merge($columns, [
+            <?= !empty($generator->searchModelClass && !$generator->enablePjax) ? "'filterModel' => \$searchModel,\n" : '' ?>
+<?= $generator->enablePjax ? "'pjax' => true,\n" : '' ?>
+            'summary' => false,
+            'responsive' => false,
+            'hover' => true,
+            'toolbar' => [
+                [
+                    'content' => Html::a('<i class="fas fa-redo"></i> ' . Yii::t('app', 'Reset Grid'), [''], [
+                        'class' => 'btn btn-default',
+                        'title' => Yii::t('app', 'Reset Grid')
+                    ]),
+                ],
+                ExportMenu::widget([
+                    'dataProvider' => $dataProvider,
+                ]),
+                '{toggleData}'
+            ],
+        <?php /* ?>
+            'panel' => [
+                'heading' => false,
+                'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> ' . <?= $generator->generateString('Create ' . Inflector::camel2words($basename)) ?>, ['create'], ['class' => 'btn btn-success btn-flat'<?= $generator->enablePjax ? ", 'data-pjax' => 0" : '' ?>]),
+                'after' => false,
+                'footer' => false
+            ],
+        <?php */ ?>
+            'columns' => ArrayHelper::merge($columns, [
                 [
                     'class' => 'kartik\grid\ActionColumn',
                     'width' => '150px',
@@ -71,7 +96,7 @@ ArrayHelper::merge($columns, [
                         'class' => 'btn btn-sm btn-danger'
                     ]
                 ]
-            ],
+            ])
         ]); ?>
     <?php else: ?>
         <?= "<?= " ?>ListView::widget([
@@ -83,9 +108,5 @@ ArrayHelper::merge($columns, [
         ]) ?>
     <?php endif; ?>
 
-    <?= $generator->enablePjax ? "    <?php Pjax::end(); ?>\n" : '' ?>
-</div>
-
-
-
+    </div>
 </div>
