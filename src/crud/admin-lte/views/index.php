@@ -74,7 +74,6 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
                 'heading' => false,
                 'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> ' . <?= $generator->generateString('Create ' . Inflector::camel2words($basename)) ?>, ['create'], ['class' => 'btn btn-success btn-flat'<?= $generator->enablePjax ? ", 'data-pjax' => 0" : '' ?>]),
                 'after' => false,
-                'footer' => false
             ],
             'columns' => ArrayHelper::merge($columns, [
                 [
