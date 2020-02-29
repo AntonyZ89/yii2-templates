@@ -67,8 +67,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
                 ],
                 ExportMenu::widget([
                     'dataProvider' => $dataProvider,
-                ]),
-                '{toggleData}'
+                ])
             ],
             'panel' => [
                 'heading' => false,
