@@ -1,6 +1,10 @@
 yii2-templates
 ============
 
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YATHVT293SXDL&source=url">
+  <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" alt="Donate with PayPal" />
+</a>
+
 Installation
 ------------
 
