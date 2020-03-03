@@ -15,6 +15,7 @@ class YiiTemplatesAsset extends AssetBundle
     public $sourcePath = '@antonyz89/templates/scripts';
     public $js = [
         'pjax.js',
+        'utils.js',
     ];
     public $depends = [
         'yii\web\JqueryAsset',
