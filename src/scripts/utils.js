@@ -1,4 +1,4 @@
-$('document').on('blur', 'input[data-krajee-datecontrol]', function () {
+$('body').on('blur', 'input[data-krajee-datecontrol]', function () {
     $(this).data('datecontrol').validate();
 });
 
