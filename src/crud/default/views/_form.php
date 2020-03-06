@@ -41,7 +41,7 @@ use <?= ltrim($generator->modelClass, '\\').";\n" ?>
             }
         } ?>
         <div class="form-group">
-            <?= "<?= " ?>Html::submitButton($model->isNewRecord ? '<i class="fa fa-plus"></i> ' . <?= $generator->generateString('Save') ?> : '<i class="fa fa-refresh"></i> ' . <?= $generator->generateString('Update') ?>, ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?= "<?= " ?>Html::submitButton($model->isNewRecord ? '<i class="fa fa-plus"></i> ' . <?= $generator->generateString('Save') ?> : '<i class="fa fas fa-sync-alt"></i> ' . <?= $generator->generateString('Update') ?>, ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         </div>
 
         <?= "<?php " ?>ActiveForm::end(); ?>
