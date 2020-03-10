@@ -64,7 +64,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
             'hover' => true,
             'toolbar' => [
                 [
-                    'content' => Html::a('<i class="fas fa-redo"></i> ' . Yii::t('app', 'Reset Grid'), [''], [
+                    'content' => Html::a('<i class="fas fa-redo"></i> ' . Yii::t('templates', 'Reset Grid'), [''], [
                         'class' => 'btn btn-default',
                         'title' => Yii::t('app', 'Reset Grid'),
                         <?= $generator->enablePjax ? "'data-pjax' => 0\n" : '' ?>
