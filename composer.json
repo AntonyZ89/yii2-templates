@@ -24,6 +24,7 @@
     ],
     "require": {
         "yiisoft/yii2": "^2.0.5",
+        "yii2mod/yii2-helpers": "*",
         "dmstr/yii2-adminlte-asset": "^2.1"
     },
     "autoload": {
