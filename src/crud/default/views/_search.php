@@ -38,7 +38,7 @@ foreach ($generator->getColumnNames() as $attribute) {
 <?php if(!$generator->enablePjax): ?>
     <div class="form-group">
         <?= "<?= " ?>Html::submitButton(<?= $generator->generateString('Search') ?>, ['class' => 'btn btn-primary']) ?>
-        <?= "<?= " ?>Html::a(<?= $generator->generateString('Reset') ?>, ['index'], ['class' => 'btn btn-default'])
+        <?= "<?= " ?>Html::a(<?= $generator->generateString('Reset') ?>, ['index'], ['class' => 'btn btn-default']) ?>
     </div>
 
 <?php endif; ?>
