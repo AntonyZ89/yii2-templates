@@ -61,7 +61,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
                 [
                     'content' => Html::a('<i class="fas fa-redo"></i> ' . Yii::t('kvgrid', 'Reset Grid'), [''], [
                         'class' => 'btn btn-default',
-                        'title' => Yii::t('app', 'Reset Grid'),
+                        'title' => Yii::t('kvgrid', 'Reset Grid'),
                         <?= $generator->enablePjax ? "'data-pjax' => 0\n" : '' ?>
                     ]),
                 ],
