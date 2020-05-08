@@ -8,6 +8,8 @@ function refresh() {
     $.pjax.reload({url: pathname, container, data: form.serialize(), method: form.attr('method') || 'get'});
 }
 
+$.pjax.defaults.scrollTo = false;
+
 
 body.on('keyup change', `${search} input`, refresh);
 body.on('change', `${search} select`, refresh);
