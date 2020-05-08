@@ -10,6 +10,5 @@ function refresh() {
 
 $.pjax.defaults.scrollTo = false;
 
-
 body.on('keyup change', `${search} input`, refresh);
 body.on('change', `${search} select`, refresh);

@@ -72,6 +72,8 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
                 ],
                 ExportMenu::widget([
                     'dataProvider' => $dataProvider,
+                    'columns' => $columns,
+                    'showConfirmAlert' => false
                 ])
             ],
         <?php /* ?>
