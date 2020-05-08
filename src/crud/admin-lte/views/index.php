@@ -55,7 +55,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
             <?= !empty($generator->searchModelClass && !$generator->enablePjax) ? "'filterModel' => \$searchModel,\n" : '' ?>
 <?= $generator->enablePjax ? "'pjax' => true,\n" : '' ?>
             'summary' => false,
-            'responsive' => false,
+            'responsive' => true,
             'hover' => true,
             'toolbar' => [
                 [
