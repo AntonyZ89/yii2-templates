@@ -140,3 +140,19 @@ GridView::widget([
 DONE!
 
 Just type on _search's fields and GridView will reload
+
+## Pjax only from form's submit
+
+To use Pjax only from form's submit, just add `'pjax-only-on-submit' => true` on **ActiveForm::begin** from  `_search.php`
+
+```php
+<?php $form = ActiveForm::begin([
+        'action' => ['index'],
+        'method' => 'get',
+        'options' => [
+            'data-pjax' => true,
+            'pjax-only-on-submit' => true // HERE
+        ],
+    ]); ?>
+
+```

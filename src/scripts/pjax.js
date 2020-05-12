@@ -14,4 +14,7 @@ if ($.pjax) {
 
 body.on('keyup change', `${search}:not([pjax-only-on-submit]) input`, refresh);
 body.on('change', `${search}:not([pjax-only-on-submit]) select`, refresh);
-body.on('submit', `${search}`, refresh);
+body.on('submit', `${search}[pjax-only-on-submit]`, function () {
+  refresh.bind(this)();
+  return false;
+});
