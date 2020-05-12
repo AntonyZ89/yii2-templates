@@ -18,3 +18,5 @@ body.on('submit', `${search}[pjax-only-on-submit]`, function () {
   refresh.bind(this)();
   return false;
 });
+
+body.on('pjax:end', search, loadMasks);
