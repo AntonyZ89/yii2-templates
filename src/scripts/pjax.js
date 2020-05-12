@@ -4,11 +4,14 @@ const pathname = window.location.pathname;
 const body = $('body');
 
 function refresh() {
-    let form = $(this).closest('form');
-    $.pjax.reload({url: pathname, container, data: form.serialize(), method: form.attr('method') || 'get'});
+  let form = $(this).closest('form');
+  $.pjax.reload({url: pathname, container, data: form.serialize(), method: form.attr('method') || 'get'});
 }
 
-$.pjax.defaults.scrollTo = false;
+if ($.pjax) {
+  $.pjax.defaults.scrollTo = false;
+}
 
-body.on('keyup change', `${search} input`, refresh);
-body.on('change', `${search} select`, refresh);
+body.on('keyup change', `${search}:not([pjax-only-on-submit]) input`, refresh);
+body.on('change', `${search}:not([pjax-only-on-submit]) select`, refresh);
+body.on('submit', `${search}`, refresh);
