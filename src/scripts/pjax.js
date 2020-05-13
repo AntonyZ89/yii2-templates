@@ -19,4 +19,4 @@ body.on('submit', `${search}[pjax-only-on-submit]`, function () {
   return false;
 });
 
-body.on('pjax:end', search, loadMasks);
+body.on('pjax:end', container, () => loadMasks());
