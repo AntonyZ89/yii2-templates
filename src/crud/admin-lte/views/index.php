@@ -59,7 +59,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
             'hover' => true,
             'toolbar' => [
                 [
-                    'content' => Html::a('<i class="fas fa-redo"></i> ' . Yii::t('kvgrid', 'Reset Grid'), [''], [
+                    'content' => Html::<?= $generator->enablePjax ? 'button' : 'a' ?>('<i class="fas fa-redo"></i> ' . Yii::t('kvgrid', 'Reset Grid'),<?= $generator->enablePjax ? '' : " ['']," ?> [
                         'class' => 'btn btn-default',
                         'title' => Yii::t('kvgrid', 'Reset Grid'),
                         <?= $generator->enablePjax ? "'data-pjax' => 0\n" : '' ?>
