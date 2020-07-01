@@ -26,9 +26,7 @@ to the require section of your `composer.json` file.
 
 Usage
 -----
-**environments/dev/YOUR_MODULE/config**
-
-example : **environments/dev/backend/config**
+**environments/dev/common/config/main**
 
 and run ``php init`` again
 ```php
@@ -44,14 +42,14 @@ if (!YII_ENV_TEST) {
             'model' => [
                 'class' => 'yii\gii\generators\model\Generator',
                 'templates' => [
-                    'default' => '@antonyz89/templates//src/model/default', // add default template
+                    'default' => '@antonyz89/templates/model/default', // add default template
                 ]
             ],
             'crud' => [
                 'class' => 'yii\gii\generators\crud\Generator',
                 'templates' => [
-                    'admin-lte' => '@antonyz89/templates//src/crud/admin-lte', // add admin-lte template
-                    'default' => '@antonyz89/templates//src/crud/default', // add default template
+                    'admin-lte' => '@antonyz89/templates/crud/admin-lte', // add admin-lte template
+                    'default' => '@antonyz89/templates/crud/default', // add default template
                 ]
             ]
         ],

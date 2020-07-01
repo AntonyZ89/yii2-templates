@@ -24,7 +24,8 @@
     ],
     "require": {
         "yiisoft/yii2": "^2.0.5",
-        "yii2mod/yii2-helpers": "*"
+        "yii2mod/yii2-helpers": "*",
+        "yiisoft/yii2-gii": "*"
     },
     "autoload": {
         "psr-4": {
