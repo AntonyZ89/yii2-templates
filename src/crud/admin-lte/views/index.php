@@ -44,7 +44,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
 
 ?>
 <div class="<?= $camel2id ?>-index box box-primary">
-    <div class="box-body no-padding">
+    <div class="box-body">
 <?php if(!empty($generator->searchModelClass)): ?>
 <?= "        <?php " . (($generator->indexWidgetType === 'grid' && !$generator->enablePjax) ? "// " : "") ?>echo $this->render('_search', ['model' => $searchModel]); ?>
 <?php endif; ?>

@@ -28,7 +28,7 @@ use <?= ltrim($generator->modelClass, '\\').";\n" ?>
 
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form <?= '<?= ' ?> Yii::$app->request->isAjax ? '' : 'box box-primary' ?>">
     <?= "<?php " ?>$form = ActiveForm::begin(); ?>
-    <div class="box-body no-padding">
+    <div class="box-body">
 
 <?php foreach ($generator->getColumnNames() as $attribute) {
     if (in_array($attribute, $safeAttributes)) {
@@ -36,7 +36,7 @@ use <?= ltrim($generator->modelClass, '\\').";\n" ?>
     }
 } ?>
     </div>
-    <div class="box-footer no-padding">
+    <div class="box-footer">
         <?= "<?= " ?>Html::submitButton($model->isNewRecord ? '<i class="fa fa-plus"></i> ' . <?= $generator->generateString('Save') ?> : '<i class="fa fas fa-sync-alt"></i> ' . <?= $generator->generateString('Update') ?>, ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
     <?= "<?php " ?>ActiveForm::end(); ?>
