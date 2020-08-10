@@ -35,6 +35,7 @@ echo "<?php\n";
 ?>
 
 namespace <?= $generator->queryNs ?>;
+
 use antonyz89\templates\db\ActiveQuery;
 
 /**
@@ -44,10 +45,6 @@ use antonyz89\templates\db\ActiveQuery;
  */
 class <?= $className ?> extends ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
 
     /**
      * {@inheritdoc}
@@ -69,19 +66,19 @@ class <?= $className ?> extends ActiveQuery
 <?php foreach ($tableSchema->columns as $name => $values):
     if (in_array($name, ['created_at', 'updated_at'])) continue;
 
-    $valueParam = "$$name";
+    $operator = ($name === 'operator' ? '$_operator' : '$operator');
     switch ($values->phpType):
         case 'integer': ?>
 <?= "\n" ?>
     /**
-     * @param integer <?= $valueParam . "\n" ?>
-     * @param string $operator
+     * @param integer $<?= $name . "\n" ?>
+     * @param string <?= $operator ?>
      * @return <?= $modelFullClassName ?>Query
      */
-    public function where<?= capitalize($name) ?>(<?= $valueParam ?>, <?= $operator = ($name === 'operator' ? '$_operator' : '$operator') ?> = '=')
+    public function where<?= capitalize($name) ?>($<?= $name ?>, <?= $operator ?> = '=')
     {
         return $this->andWhere([
-            <?= $operator ?>, sprintf('%s.<?= $name ?>', $this->_alias), <?= $valueParam . "\n" ?>
+            <?= $operator ?>, sprintf('%s.<?= $name ?>', $this->_alias), $<?= $name . "\n" ?>
         ]);
     }
 <?php break;
@@ -89,14 +86,14 @@ class <?= $className ?> extends ActiveQuery
         $isDate = in_array($values->dbType, ['date', 'datetime']); ?>
 <?= "\n" ?>
     /**
-     * @param string <?= $valueParam . "\n" ?>
-     * @param string $operator
+     * @param string $<?= $name . "\n" ?>
+     * @param string <?= $operator ?>
      * @return <?= $modelFullClassName ?>Query
      */
-    public function where<?= capitalize($name) ?>(<?= $valueParam ?>, $operator = <?= $isDate ? "'='" : "'LIKE'" ?>)
+    public function where<?= capitalize($name) ?>($<?= $name ?>, <?= $operator ?> = <?= $isDate ? "'='" : "'LIKE'" ?>)
     {
         return $this->andWhere([
-            $operator, sprintf('%s.<?= $name ?>', $this->_alias), <?= $valueParam . "\n" ?>
+            <?= $operator ?>, sprintf('%s.<?= $name ?>', $this->_alias), $<?= $name . "\n" ?>
         ]);
     }
     <?php if($isDate): ?>
@@ -116,4 +113,5 @@ class <?= $className ?> extends ActiveQuery
 <?php break; ?>
 <?php endswitch; ?>
 <?php endforeach; ?>
+
 }
