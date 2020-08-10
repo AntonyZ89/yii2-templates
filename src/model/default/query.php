@@ -72,7 +72,7 @@ class <?= $className ?> extends ActiveQuery
 <?= "\n" ?>
     /**
      * @param integer $<?= $name . "\n" ?>
-     * @param string <?= $operator ?>
+     * @param string <?= $operator . "\n" ?>
      * @return <?= $modelFullClassName ?>Query
      */
     public function where<?= capitalize($name) ?>($<?= $name ?>, <?= $operator ?> = '=')
@@ -87,7 +87,7 @@ class <?= $className ?> extends ActiveQuery
 <?= "\n" ?>
     /**
      * @param string $<?= $name . "\n" ?>
-     * @param string <?= $operator ?>
+     * @param string <?= $operator . "\n" ?>
      * @return <?= $modelFullClassName ?>Query
      */
     public function where<?= capitalize($name) ?>($<?= $name ?>, <?= $operator ?> = <?= $isDate ? "'='" : "'LIKE'" ?>)
