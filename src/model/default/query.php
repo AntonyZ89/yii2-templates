@@ -78,10 +78,10 @@ class <?= $className ?> extends ActiveQuery
      * @param string $operator
      * @return <?= $modelFullClassName ?>Query
      */
-    public function where<?= capitalize($name) ?>(<?= $valueParam ?>, $operator = '=')
+    public function where<?= capitalize($name) ?>(<?= $valueParam ?>, <?= $operator = ($name === 'operator' ? '$_operator' : '$operator') ?> = '=')
     {
         return $this->andWhere([
-            $operator, sprintf('%s.<?= $name ?>', $this->_alias), <?= $valueParam . "\n" ?>
+            <?= $operator ?>, sprintf('%s.<?= $name ?>', $this->_alias), <?= $valueParam . "\n" ?>
         ]);
     }
 <?php break;
