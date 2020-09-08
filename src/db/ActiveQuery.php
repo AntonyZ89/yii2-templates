@@ -23,4 +23,22 @@ class ActiveQuery extends  ActiveQueryBase
     {
         return $this->orderBy(new Expression('RAND()'));
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function onCondition($condition, $params = [])
+    {
+        $_condition = [];
+
+        foreach ($condition as $column => $value) {
+            $column = str_replace('@alias', $this->_alias, $column);
+            $_condition[$column] = $value;
+        }
+
+        return parent::onCondition($_condition, $params);
+    }
+
+    // TODO auto alias for others queries
+
 }
