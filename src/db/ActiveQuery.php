@@ -7,10 +7,13 @@ use yii\db\Expression;
 use yii2mod\helpers\ArrayHelper;
 
 /**
- * @property mixed $_alias
+ * @property string $_alias
  */
 class ActiveQuery extends ActiveQueryBase
 {
+    /**
+     * @return string
+     */
     public function get_alias()
     {
         return ArrayHelper::last($this->getTableNameAndAlias());
@@ -26,6 +29,7 @@ class ActiveQuery extends ActiveQueryBase
 
     /**
      * {@inheritDoc}
+     * @return $this
      */
     public function onCondition($condition, $params = [])
     {
@@ -34,6 +38,7 @@ class ActiveQuery extends ActiveQueryBase
 
     /**
      * {@inheritDoc}
+     * @return $this
      */
     public function andFilterWhere(array $params)
     {
@@ -42,6 +47,7 @@ class ActiveQuery extends ActiveQueryBase
 
     /**
      * {@inheritDoc}
+     * @return $this
      */
     public function where($condition, $params = [])
     {
@@ -50,6 +56,7 @@ class ActiveQuery extends ActiveQueryBase
 
     /**
      * {@inheritDoc}
+     * @return $this
      */
     public function andWhere($condition, $params = [])
     {
@@ -58,6 +65,7 @@ class ActiveQuery extends ActiveQueryBase
 
     /**
      * {@inheritDoc}
+     * @return $this
      */
     public function orWhere($condition, $params = [])
     {
@@ -66,6 +74,7 @@ class ActiveQuery extends ActiveQueryBase
 
     /**
      * {@inheritDoc}
+     * @return $this
      */
     public function filterWhere(array $condition)
     {
@@ -74,6 +83,7 @@ class ActiveQuery extends ActiveQueryBase
 
     /**
      * {@inheritDoc}
+     * @return $this
      */
     public function orFilterWhere(array $condition)
     {
