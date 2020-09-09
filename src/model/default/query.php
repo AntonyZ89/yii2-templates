@@ -78,7 +78,7 @@ class <?= $className ?> extends ActiveQuery
     public function where<?= capitalize($name) ?>($<?= $name ?>, <?= $operator ?> = '=')
     {
         return $this->andWhere([
-            <?= $operator ?>, sprintf('%s.<?= $name ?>', $this->_alias), $<?= $name . "\n" ?>
+            <?= $operator ?>, '@alias.<?= $name ?>', $<?= $name . "\n" ?>
         ]);
     }
 <?php break;
@@ -93,7 +93,7 @@ class <?= $className ?> extends ActiveQuery
     public function where<?= capitalize($name) ?>($<?= $name ?>, <?= $operator ?> = <?= $isDate ? "'='" : "'LIKE'" ?>)
     {
         return $this->andWhere([
-            <?= $operator ?>, sprintf('%s.<?= $name ?>', $this->_alias), $<?= $name . "\n" ?>
+            <?= $operator ?>, '@alias.<?= $name ?>', $<?= $name . "\n" ?>
         ]);
     }
     <?php if($isDate): ?>
@@ -106,7 +106,7 @@ class <?= $className ?> extends ActiveQuery
     public function where<?= capitalize($name) ?>Between($start_date, $end_date)
     {
         return $this->andWhere([
-            'BETWEEN', sprintf('%s.<?= $name ?>', $this->_alias), $start_date, $end_date
+            'BETWEEN', '@alias.<?= $name ?>', $start_date, $end_date
         ]);
     }
     <?php endif; ?>
