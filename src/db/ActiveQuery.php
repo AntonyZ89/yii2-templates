@@ -9,7 +9,7 @@ use yii2mod\helpers\ArrayHelper;
 /**
  * @property mixed $_alias
  */
-class ActiveQuery extends  ActiveQueryBase
+class ActiveQuery extends ActiveQueryBase
 {
     public function get_alias()
     {
@@ -43,48 +43,75 @@ class ActiveQuery extends  ActiveQueryBase
     /**
      * {@inheritDoc}
      */
-    public function where($condition, $params = []) {
+    public function where($condition, $params = [])
+    {
         return parent::where($this->putAlias($condition), $params);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function andWhere($condition, $params = []) {
+    public function andWhere($condition, $params = [])
+    {
         return parent::andWhere($this->putAlias($condition), $params);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function orWhere($condition, $params = []) {
+    public function orWhere($condition, $params = [])
+    {
         return parent::orWhere($this->putAlias($condition), $params);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function filterWhere(array $condition) {
+    public function filterWhere(array $condition)
+    {
         return parent::filterWhere($this->putAlias($condition));
     }
 
     /**
      * {@inheritDoc}
      */
-    public function orFilterWhere(array $condition) {
+    public function orFilterWhere(array $condition)
+    {
         return parent::orFilterWhere($this->putAlias($condition));
     }
 
     /**
-     * @param array $params
+     * @param string|array $params
      * @return array
      */
-    protected function putAlias($params) {
+    protected function putAlias($params)
+    {
+        if (is_string($params)) {
+            return str_replace('@alias', $this->_alias, $params);
+        }
+
         $_params = [];
 
         foreach ($params as $column => $value) {
-            $column = str_replace('@alias', $this->_alias, $column);
-            $value = str_replace('@alias', $this->_alias, $value);
+            if (is_string($column)) {
+                $column = str_replace('@alias', $this->_alias, $column);
+            }
+
+            if (is_array($value)) {
+                foreach ($value as &$item) {
+                    if (is_array($item)) {
+                        $item = $this->putAlias($item);
+                    } else if (is_string($value)) {
+                        $item = str_replace('@alias', $this->_alias, $item);
+                    }
+                }
+
+                unset($item);
+
+            } else if (is_string($value)) {
+                $value = str_replace('@alias', $this->_alias, $value);
+            }
+
             $_params[$column] = $value;
         }
 
