@@ -108,16 +108,7 @@ class ActiveQuery extends ActiveQueryBase
             }
 
             if (is_array($value)) {
-                foreach ($value as &$item) {
-                    if (is_array($item)) {
-                        $item = $this->putAlias($item);
-                    } else if (is_string($value)) {
-                        $item = str_replace('@alias', $this->_alias, $item);
-                    }
-                }
-
-                unset($item);
-
+                $value = $this->putAlias($value);
             } else if (is_string($value)) {
                 $value = str_replace('@alias', $this->_alias, $value);
             }
