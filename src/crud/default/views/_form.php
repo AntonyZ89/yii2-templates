@@ -19,7 +19,6 @@ echo "<?php\n";
 
 use yii\helpers\Html;
 use kartik\form\ActiveForm;
-use yii\helpers\Html;
 use yii\web\View;
 use <?= ltrim($generator->modelClass, '\\').";\n" ?>
 
