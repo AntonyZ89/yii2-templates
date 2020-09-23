@@ -44,10 +44,11 @@ if (!function_exists('object_get')) {
      *
      * @param object $object
      * @param string $key
+     * @param array $params
      * @param mixed $default
      * @return mixed
      */
-    function object_get(object $object, string $key, $default = null)
+    function object_get(object $object, string $key, array $params = [], $default = null)
     {
         if ($key === null || trim($key) === '') {
             return $object;
@@ -58,7 +59,7 @@ if (!function_exists('object_get')) {
             }
             $object = $object->{$segment};
         }
-        return $object;
+        return value($object, $params);
     }
 }
 
