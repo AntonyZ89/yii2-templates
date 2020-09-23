@@ -25,16 +25,16 @@ if (!function_exists('data_get')) {
                 $target = $target[$segment];
             } elseif (is_object($target)) {
                 if (!isset($target->{$segment})) {
-                    return value($default, $params);
+                    return value($default);
                 }
 
                 $target = $target->{$segment};
             } else {
-                return value($default, $params);
+                return value($default);
             }
         }
 
-        return $target;
+        return value($target, $params);
     }
 }
 
@@ -70,19 +70,6 @@ if (!function_exists('last')) {
      * @return mixed
      */
     function last(array $array)
-    {
-        return end($array);
-    }
-}
-
-if (!function_exists('first')) {
-    /**
-     * Get the first element from an array.
-     *
-     * @param array $array
-     * @return mixed
-     */
-    function first(array $array)
     {
         return end($array);
     }
@@ -182,5 +169,4 @@ if (!function_exists('array_every')) {
         }
         return true;
     }
-
 }
