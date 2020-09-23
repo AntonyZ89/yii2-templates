@@ -10,7 +10,7 @@ if (!function_exists('data_get')) {
      * @param mixed $default
      * @return mixed
      */
-    function data_get($target, string $key, array $params = [],  $default = null)
+    function data_get($target, string $key, array $params = [], $default = null)
     {
         if ($key === null) {
             return $target;
@@ -169,5 +169,11 @@ if (!function_exists('array_every')) {
             }
         }
         return true;
+    }
+}
+
+if (!function_exists('random_color')) {
+    function random_color() {
+        return sprintf('#%06X', random_int(0, 0xFFFFFF));
     }
 }
