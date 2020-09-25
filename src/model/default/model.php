@@ -14,6 +14,25 @@
 /* @var $rules string[] list of validation rules */
 /* @var $relations array list of relations (name => relation declaration) */
 
+$haveCreatedAt = in_array('created_at', $tableSchema->columnNames, true);
+$haveUpdatedAt = in_array('updated_at', $tableSchema->columnNames, true);
+
+if ($haveCreatedAt && $haveUpdatedAt) {
+    $timestampBehaviour = 'TimestampBehaviour::class';
+} else if($haveCreatedAt) {
+    $timestampBehaviour = "[
+    'class' => TimestampBehaviour::class,
+    'updatedAtAttribute' => false
+]";
+} else if($haveUpdatedAt) {
+    $timestampBehaviour = "[
+    'class' => TimestampBehaviour::class,
+    'createdAtAttribute' => false
+]";
+} else {
+    $timestampBehaviour = null;
+}
+
 echo "<?php\n";
 ?>
 
@@ -61,7 +80,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     public function behaviors()
     {
         return [
-            TimestampBehavior::class,
+            <?= $timestampBehaviour ?>,
         ];
     }
 
