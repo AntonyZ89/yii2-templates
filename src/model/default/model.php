@@ -23,12 +23,12 @@ if ($haveCreatedAt && $haveUpdatedAt) {
     $timestampBehaviour = "[
                 'class' => TimestampBehavior::class,
                 'updatedAtAttribute' => false
-                ]";
+            ]";
 } else if($haveUpdatedAt) {
     $timestampBehaviour = "[
                 'class' => TimestampBehavior::class,
                 'createdAtAttribute' => false
-                ]";
+            ]";
 } else {
     $timestampBehaviour = null;
 }
