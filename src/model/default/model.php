@@ -18,19 +18,19 @@ $haveCreatedAt = in_array('created_at', $tableSchema->columnNames, true);
 $haveUpdatedAt = in_array('updated_at', $tableSchema->columnNames, true);
 
 if ($haveCreatedAt && $haveUpdatedAt) {
-    $timestampBehaviour = 'TimestampBehaviour::class';
+    $timestampBehavior = 'TimestampBehavior::class';
 } else if($haveCreatedAt) {
-    $timestampBehaviour = "[
+    $timestampBehavior = "[
                 'class' => TimestampBehavior::class,
                 'updatedAtAttribute' => false
             ]";
 } else if($haveUpdatedAt) {
-    $timestampBehaviour = "[
+    $timestampBehavior = "[
                 'class' => TimestampBehavior::class,
                 'createdAtAttribute' => false
             ]";
 } else {
-    $timestampBehaviour = null;
+    $timestampBehavior = null;
 }
 
 echo "<?php\n";
@@ -80,7 +80,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     public function behaviors()
     {
         return [
-            <?= $timestampBehaviour ?>,
+            <?= $timestampBehavior ?>,
         ];
     }
 
