@@ -80,7 +80,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     public function behaviors()
     {
         return [
-            <?= $timestampBehavior ?>,
+            <?= $timestampBehavior ?>
         ];
     }
 
