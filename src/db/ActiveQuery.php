@@ -111,6 +111,8 @@ class ActiveQuery extends ActiveQueryBase
                 $value = $this->putAlias($value);
             } else if (is_string($value)) {
                 $value = str_replace('@alias', $this->_alias, $value);
+            } else if($value instanceof Expression) {
+                $value->expression = str_replace('@alias', $this->_alias, $value->expression);
             }
 
             $_params[$column] = $value;
