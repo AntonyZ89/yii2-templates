@@ -91,6 +91,15 @@ class ActiveQuery extends ActiveQueryBase
     }
 
     /**
+     * {@inheritDoc}
+     * @return $this
+     */
+    public function leftJoin($table, $on = '', $params = [])
+    {
+        return parent::leftJoin($table, $this->putAlias($on), $params);
+    }
+
+    /**
      * @param string|array $params
      * @return array
      */
