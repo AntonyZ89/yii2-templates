@@ -31,6 +31,15 @@ class ActiveQuery extends ActiveQueryBase
      * {@inheritDoc}
      * @return $this
      */
+    public function select($columns, $options = null)
+    {
+        return parent::select($this->putAlias($columns), $options);
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return $this
+     */
     public function onCondition($condition, $params = [])
     {
         return parent::onCondition($this->putAlias($condition), $params);
