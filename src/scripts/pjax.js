@@ -1,6 +1,3 @@
-const pathname = window.location.pathname;
-const body = $('body');
-
 $('div[data-pjax-container]').each(function () {
   const container = '#' + $(this).attr('id');
 

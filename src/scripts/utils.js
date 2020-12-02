@@ -1,14 +1,15 @@
-$('body').on('blur', 'input[data-krajee-datecontrol]', function () {
-    $(this).data('datecontrol').validate();
-});
+const pathname = window.location.pathname;
+const body = $('body');
 
 function loadMasks() {
-    $('input[data-krajee-kvdatepicker]').inputmask({
-        mask: '99/99/9999'
-    });
+    const datepicker = $('input[data-krajee-kvdatepicker]');
+    const dateRangePicker = $('input[data-krajee-daterangepicker]');
 
-    $('input[data-krajee-daterangepicker]').inputmask({
-        mask: '99/99/9999 - 99/99/9999'
+    datepicker.length && datepicker.inputmask({mask: '99/99/9999'});
+    dateRangePicker.length && dateRangePicker.inputmask({mask: '99/99/9999 - 99/99/9999'});
+
+    body.on('blur', 'input[data-krajee-datecontrol]', function () {
+        $(this).data('datecontrol').validate();
     });
 }
 
