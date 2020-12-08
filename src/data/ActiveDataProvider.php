@@ -1,7 +1,7 @@
 <?php
 
 
-namespace antonyz89\templates\db;
+namespace antonyz89\templates\data;
 
 use yii\base\InvalidConfigException;
 use \yii\data\ActiveDataProvider  as BaseActiveDataProvider;
