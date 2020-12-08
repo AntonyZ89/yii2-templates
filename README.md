@@ -155,7 +155,9 @@ To use Pjax only from form's submit, just add `'pjax-only-on-submit' => true` on
 
 ```
 
-## ActiveQuery alias
+## ActiveQuery
+
+### Alias
 
 Use `@alias.` on query to replace it with `::tableName` or `alias`.
 
@@ -167,3 +169,7 @@ User::find()->alias('example')->where(['@alias.name' => 'Antony'])->groupBy('@al
 # result
 SELECT `user`.* FROM `user` as `example` WHERE `example`.`name` = 'Antony' GROUP BY `example`.`age`
 ```
+
+### Disable GROUP BY
+
+set `$query->groupBy(false)` to disable any `GROUP BY` on query
