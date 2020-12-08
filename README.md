@@ -40,13 +40,13 @@ if (!YII_ENV_TEST) {
         'class' => 'yii\gii\Module',
         'generators' => [
             'model' => [
-                'class' => 'yii\gii\generators\model\Generator',
+                'class' => 'antonyz89\templates\crud\Generator',
                 'templates' => [
                     'default' => '@antonyz89/templates/model/default', // add default template
                 ]
             ],
             'crud' => [
-                'class' => 'yii\gii\generators\crud\Generator',
+                'class' => 'antonyz89\templates\crud\Generator',
                 'templates' => [
                     'admin-lte' => '@antonyz89/templates/crud/admin-lte', // add admin-lte template
                     'default' => '@antonyz89/templates/crud/default', // add default template
