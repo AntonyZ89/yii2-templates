@@ -21,7 +21,7 @@ use <?= $generator->indexWidgetType === 'grid' ? "kartik\\grid\\GridView" : "yii
 
 /* @var $this yii\web\View */
 <?= !empty($generator->searchModelClass) ? "/* @var \$searchModel " . ltrim($generator->searchModelClass, '\\') . " */\n" : '' ?>
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $dataProvider antonyz89\templates\data\ActiveDataProvider */
 
 $this->title = <?= $generator->generateString(Inflector::pluralize(Inflector::camel2words($basename))) ?>;
 $this->params['breadcrumbs'][] = $this->title;
