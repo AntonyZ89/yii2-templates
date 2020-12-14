@@ -4,11 +4,22 @@
 namespace antonyz89\templates\crud;
 
 
+use ReflectionClass;
 use yii\db\Schema;
 use yii\gii\generators\crud\Generator as BaseGenerator;
 
 class Generator extends BaseGenerator
 {
+    /**
+     * {@inheritDoc}
+     */
+    public function formView()
+    {
+        $class = new ReflectionClass(BaseGenerator::class);
+
+        return dirname($class->getFileName()) . '/form.php';
+    }
+
     /**
      * {@inheritDoc}
      */
