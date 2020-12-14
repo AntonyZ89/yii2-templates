@@ -40,7 +40,7 @@ if (!YII_ENV_TEST) {
         'class' => 'yii\gii\Module',
         'generators' => [
             'model' => [
-                'class' => 'antonyz89\templates\crud\Generator',
+                'class' => 'antonyz89\templates\model\Generator',
                 'templates' => [
                     'default' => '@antonyz89/templates/model/default', // add default template
                 ]
