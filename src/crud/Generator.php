@@ -31,11 +31,11 @@ class Generator extends BaseGenerator
             /* @var $model \yii\base\Model */
             $model = new $class();
             foreach ($model->attributes() as $attribute) {
-                $columns["@alias.{$attribute}"] = 'unknown';
+                $columns[$attribute] = 'unknown';
             }
         } else {
             foreach ($table->columns as $column) {
-                $columns["@alias.{$column->name}"] = $column->type;
+                $columns[$column->name] = $column->type;
             }
         }
 
@@ -56,11 +56,11 @@ class Generator extends BaseGenerator
                 case Schema::TYPE_TIME:
                 case Schema::TYPE_DATETIME:
                 case Schema::TYPE_TIMESTAMP:
-                    $hashConditions[] = "'{$column}' => \$this->{$column},";
+                    $hashConditions[] = "'@alias.{$column}' => \$this->{$column},";
                     break;
                 default:
                     $likeKeyword = $this->getClassDbDriverName() === 'pgsql' ? 'ilike' : 'like';
-                    $likeConditions[] = "->andFilterWhere(['{$likeKeyword}', '{$column}', \$this->{$column}])";
+                    $likeConditions[] = "->andFilterWhere(['{$likeKeyword}', '@alias.{$column}', \$this->{$column}])";
                     break;
             }
         }
