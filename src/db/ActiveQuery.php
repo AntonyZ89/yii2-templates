@@ -138,6 +138,15 @@ class ActiveQuery extends ActiveQueryBase
     }
 
     /**
+     * {@inheritDoc}
+     * @return $this
+     */
+    public function orderBy($columns)
+    {
+        return parent::orderBy($this->putAlias($columns));
+    }
+
+    /**
      * @param string|array $params
      * @return array
      */
