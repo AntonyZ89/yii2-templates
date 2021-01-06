@@ -1,6 +1,5 @@
 const pathname = window.location.pathname;
 const body = $('body');
-const window = $(window);
 
 function loadMasks() {
     const datepicker = $('input[data-krajee-kvdatepicker]');
