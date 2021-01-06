@@ -177,3 +177,15 @@ if (!function_exists('random_color')) {
         return sprintf('#%06X', random_int(0, 0xFFFFFF));
     }
 }
+
+if (!function_exists('group_split')) {
+    function group_split($array, $size) {
+        $result = [];
+
+        while (count($array)) {
+            $result[] = array_splice($array, 0, $size);
+        }
+
+        return $result;
+    }
+}
