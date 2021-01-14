@@ -168,7 +168,10 @@ class ActiveQuery extends ActiveQueryBase
             } else if (is_string($value)) {
                 $value = str_replace('@alias', $this->_alias, $value);
             } else if($value instanceof Expression) {
-                $value->expression = str_replace('@alias', $this->_alias, $value->expression);
+                $value = new Expression(
+                    str_replace('@alias', $this->_alias, $value->expression),
+                    $value->params
+                );
             }
 
             $_params[$column] = $value;
