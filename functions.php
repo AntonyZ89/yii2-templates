@@ -163,6 +163,10 @@ if (!function_exists('array_every')) {
      */
     function array_every(array $array, callable $fn)
     {
+        if (empty($array)) {
+            return false;
+        }
+
         foreach ($array as $value) {
             if (!$fn($value)) {
                 return false;
