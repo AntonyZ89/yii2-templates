@@ -177,13 +177,15 @@ if (!function_exists('array_every')) {
 }
 
 if (!function_exists('random_color')) {
-    function random_color() {
+    function random_color()
+    {
         return sprintf('#%06X', random_int(0, 0xFFFFFF));
     }
 }
 
 if (!function_exists('group_split')) {
-    function group_split($array, $size) {
+    function group_split($array, $size)
+    {
         $result = [];
 
         while (count($array)) {
@@ -191,5 +193,51 @@ if (!function_exists('group_split')) {
         }
 
         return $result;
+    }
+}
+
+if (!function_exists('api_result')) {
+    /**
+     * return array with response to API
+     *
+     * for `$errors` use an array with api_error()
+     *
+     * Example:
+     *
+     * ```php
+     * api_result(false, [
+     *   api_error('example', 'example_1'),
+     *   api_error('example_2', ['example_1', 'example_2'])
+     * ]);
+     * ```
+     *
+     * @param bool $result
+     * @param array $errors
+     * @return array|bool[]
+     */
+    function api_result(bool $result, ...$errors): array
+    {
+        if ($result) {
+            return ['result' => true];
+        }
+
+        return ['result' => false, 'errors' => $errors];
+    }
+}
+
+if (!function_exists('api_error')) {
+    /**
+     * return array with errors to be used in `api_result()`
+     *
+     * @param string $field
+     * @param string|array $errors
+     * @return array
+     */
+    function api_error(string $field, $errors): array
+    {
+        return [
+            'field' => $field,
+            'errors' => (array)$errors
+        ];
     }
 }
