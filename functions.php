@@ -237,7 +237,7 @@ if (!function_exists('api_error')) {
     {
         return [
             'field' => $field,
-            'errors' => (array)$errors
+            'msgs' => (array)$errors
         ];
     }
 }
