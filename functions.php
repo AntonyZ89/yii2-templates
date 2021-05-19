@@ -205,10 +205,10 @@ if (!function_exists('api_result')) {
      * Example:
      *
      * ```php
-     * api_result(false, [
+     * api_result(false,
      *   api_error('example', 'example_1'),
      *   api_error('example_2', ['example_1', 'example_2'])
-     * ]);
+     * );
      * ```
      *
      * @param bool $result
