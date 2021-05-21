@@ -25,6 +25,15 @@ function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+function randomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[randomInt(0, letters.length)];
+    }
+    return color;
+}
+
 function getSelectedRows() {
     return $('.grid-view').yiiGridView('getSelectedRows');
 }
