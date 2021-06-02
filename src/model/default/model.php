@@ -13,6 +13,7 @@
 /* @var $labels string[] list of attribute labels (name => label) */
 /* @var $rules string[] list of validation rules */
 /* @var $relations array list of relations (name => relation declaration) */
+/* @var $relationsClassHints array list of relations (name => relation declaration) */
 
 $haveCreatedAt = in_array('created_at', $tableSchema->columnNames, true);
 $haveUpdatedAt = in_array('updated_at', $tableSchema->columnNames, true);
@@ -80,7 +81,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     public function behaviors()
     {
         return [
-            <?= $timestampBehavior ?>
+            <?= $timestampBehavior . "\n" ?>
         ];
     }
 

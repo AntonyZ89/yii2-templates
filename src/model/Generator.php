@@ -3,17 +3,20 @@
 
 namespace antonyz89\templates\model;
 
+use antonyz89\templates\db\ActiveRecord;
 use ReflectionClass;
-use yii\gii\generators\model\Generator as BaseGenerator;
+use yii\gii\generators\model\Generator as GeneratorBase;
 
-class Generator extends BaseGenerator
+class Generator extends GeneratorBase
 {
+    public $baseClass = ActiveRecord::class;
+
     /**
      * {@inheritDoc}
      */
     public function formView()
     {
-        $class = new ReflectionClass(BaseGenerator::class);
+        $class = new ReflectionClass(GeneratorBase::class);
 
         return dirname($class->getFileName()) . '/form.php';
     }

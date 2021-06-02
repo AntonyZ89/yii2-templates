@@ -16,6 +16,7 @@ class YiiTemplatesAsset extends AssetBundle
     public $js = [
         'utils.js',
         'pjax.js',
+        'toastify.js'
     ];
     public $depends = [
         'yii\web\JqueryAsset',
