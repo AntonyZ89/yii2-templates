@@ -22,7 +22,7 @@ function addPjax(element, container) {
 
     body.on('change', `${search}:not([pjax-only-on-submit]) input`, refresh);
     body.on('change', `${search}:not([pjax-only-on-submit]) select`, refresh);
-    body.on('submit', `${search}[pjax-only-on-submit]`, function () {
+    body.on('submit', `${search}`, function () {
       refresh.bind(this)();
       return false;
     });
