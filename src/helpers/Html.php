@@ -15,7 +15,23 @@ class Html extends \yii\helpers\Html
     public static function tag($name, $content = '', $options = [])
     {
         if (is_array($content)) {
-            $content = implode($content);
+            $_content = '';
+
+            foreach ($content as $key => $value) {
+                if (is_string($key)) {
+                    if (is_array($value)) {
+                        foreach ($value as $item) {
+                            $_content .= self::tag('div', $item, $key);
+                        }
+                    } else {
+                        $_content .= self::tag('div', $value, $key);
+                    }
+                } else {
+                    $_content .= $value;
+                }
+            }
+
+            $content = $_content;
         }
 
         if (is_string($options)) {
