@@ -40,4 +40,17 @@ class Html extends \yii\helpers\Html
 
         return parent::tag($name, $content, $options);
     }
+
+    /**
+     * @inheritDoc
+     * @param array|string $options
+     */
+    public static function textInput($name, $value = null, $options = [])
+    {
+        if (is_string($options)) {
+            $options = ['class' => $options];
+        }
+
+        return static::input('text', $name, $value, $options);
+    }
 }
