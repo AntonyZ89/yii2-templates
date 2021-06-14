@@ -1,10 +1,14 @@
 $('div[data-pjax-container]').each(function () {
-  const container = '#' + $(this).attr('id');
+  const self = $(this),
+      target = self.data('target'),
+      container = '#' + self.attr('id');
 
-  $(this).siblings().each(function () {
+  self.siblings().each(function () {
     addPjax($(this), container);
   });
-  addPjax($(this), container);
+
+  addPjax(self, container);
+  target && addPjax($(`#${target}`), container);
 });
 
 if ($.pjax) {
