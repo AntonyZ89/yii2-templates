@@ -45,62 +45,58 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
 
 ?>
 <?php if(!empty($generator->searchModelClass)): ?>
-<?= "        <?php " . (($generator->indexWidgetType === 'grid' && !$generator->enablePjax) ? "// " : "") ?>echo $this->render('_search', ['model' => $searchModel]); ?>
+<?= "<?php " . (($generator->indexWidgetType === 'grid' && !$generator->enablePjax) ? "// " : "") ?>echo $this->render('_search', ['model' => $searchModel]); ?>
 <?php endif; ?>
 <div class="<?= $camel2id ?>-index mdl-cell mdl-cell--12-col">
     <div class="mdl-card mdl-shadow--2dp">
-        <div class="mdl-card__supporting-text">
-
-    <?php if ($generator->indexWidgetType === 'grid'): ?>
-            <?= "<?= " ?>GridView::widget([
-                'dataProvider' => $dataProvider,
-                <?= !empty($generator->searchModelClass && !$generator->enablePjax) ? "'filterModel' => \$searchModel,\n" : '' ?>
-    <?= $generator->enablePjax ? "'pjax' => true,\n" : '' ?>
-    <?= $generator->enablePjax ? "'pjaxSettings' => [
+<?php if ($generator->indexWidgetType === 'grid'): ?>
+        <?= "<?= " ?>GridView::widget([
+            'dataProvider' => $dataProvider,
+            <?= !empty($generator->searchModelClass && !$generator->enablePjax) ? "'filterModel' => \$searchModel,\n" : '' ?>
+<?= $generator->enablePjax ? "'pjax' => true,\n" : '' ?>
+<?= $generator->enablePjax ? "\t\t\t'pjaxSettings' => [
                 'options' => [ // kartik' GridView's pjax options
                     'options' => [ // Yii2 Pjax's options
                         'data-target' => '$camel2id-search-drawer'
                     ]
                 ]
-            ]\n" : '' ?>
-                'drawer' => '<?= $camel2id ?>-search-drawer',
-                'summary' => false,
-                'responsive' => true,
-                'hover' => true,
-                'toolbar' => [
-                    [
-                        'content' => Html::a('<i class="material-icons">restart_alt</i> ' . Yii::t('kvgrid', 'Reset Grid'), [''], [
-                            'class' => Html::BUTTON_CLASS . ' ' . Html::BUTTON_COLORS['white'],
-                            'title' => Yii::t('kvgrid', 'Reset Grid'),
-                            'data-pjax' => 0
-                        ]),
-                    ],
-                    ExportMenu::widget([
-                        'dataProvider' => $dataProvider,
-                        'columns' => $columns,
-                        'showConfirmAlert' => false
-                    ])
+            ],\n" : '' ?>
+            'drawer' => '<?= $camel2id ?>-search-drawer',
+            'summary' => false,
+            'responsive' => true,
+            'hover' => true,
+            'toolbar' => [
+                [
+                    'content' => Html::a('<i class="material-icons">restart_alt</i> ' . Yii::t('kvgrid', 'Reset Grid'), [''], [
+                        'class' => Html::BUTTON_CLASS . ' ' . Html::BUTTON_COLORS['white'],
+                        'title' => Yii::t('kvgrid', 'Reset Grid'),
+                        'data-pjax' => 0
+                    ]),
                 ],
-                'panel' => [
-                    'before' => Html::a('<i class="material-icons">add</i> ' . <?= $generator->generateString('Create ' . Inflector::camel2words($basename)) ?>, ['create'], ['class' => Html::BUTTON_CLASS . ' ' . Html::BUTTON_COLORS['green']<?= $generator->enablePjax ? ", 'data-pjax' => 0" : '' ?>]),
-                ],
-                'layout' => "{items}\n{summary}\n{pager}",
-                'columns' => ArrayHelper::merge($columns, [
-                    [
-                        'class' => ActionColumn::class
-                    ]
+                ExportMenu::widget([
+                    'dataProvider' => $dataProvider,
+                    'columns' => $columns,
+                    'showConfirmAlert' => false
                 ])
-            ]); ?>
-        <?php else: ?>
-            <?= "<?= " ?>ListView::widget([
-            'dataProvider' => $dataProvider,
-            'itemOptions' => ['class' => 'item'],
-            'itemView' => function ($model, $key, $index, $widget) {
-            return Html::a(Html::encode($model-><?= $nameAttribute ?>), ['view', <?= $urlParams ?>]);
-            },
-            ]) ?>
-        <?php endif; ?>
-
-        </div>
+            ],
+            'panel' => [
+                'before' => Html::a('<i class="material-icons">add</i> ' . <?= $generator->generateString('Create ' . Inflector::camel2words($basename)) ?>, ['create'], ['class' => Html::BUTTON_CLASS . ' ' . Html::BUTTON_COLORS['green']<?= $generator->enablePjax ? ", 'data-pjax' => 0" : '' ?>]),
+            ],
+            'layout' => "{items}\n{summary}\n{pager}",
+            'columns' => ArrayHelper::merge($columns, [
+                [
+                    'class' => ActionColumn::class
+                ]
+            ])
+        ]) ?>
+    <?php else: ?>
+        <?= "<?= " ?>ListView::widget([
+        'dataProvider' => $dataProvider,
+        'itemOptions' => ['class' => 'item'],
+        'itemView' => function ($model, $key, $index, $widget) {
+        return Html::a(Html::encode($model-><?= $nameAttribute ?>), ['view', <?= $urlParams ?>]);
+        },
+        ]) ?>
+    <?php endif; ?>
     </div>
 </div>
