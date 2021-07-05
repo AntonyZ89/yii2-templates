@@ -34,7 +34,7 @@ use <?= ltrim($generator->modelClass, '\\').";\n" ?>
         <div class="mdl-grid">
 <?php foreach ($generator->getColumnNames() as $attribute) {
     if (in_array($attribute, $safeAttributes)) {
-        echo "\t\t\t\t<?= Html::cell(" . $generator->generateActiveField($attribute) . ", 'mdl-cell--4-col mdl-cell--2-col-phone') ?>\n\n";
+        echo "\t\t\t\t<?= Html::cell(" . $generator->generateActiveField($attribute) . ", 'mdl-cell--4-col mdl-cell--12-col-phone') ?>\n\n";
     }
 } ?>
         </div>
