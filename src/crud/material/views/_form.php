@@ -26,7 +26,7 @@ use <?= ltrim($generator->modelClass, '\\').";\n" ?>
 /* @var $form ActiveForm */
 ?>
 
-<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form mdl-cell mdl-cell--12-col <?= '<?= ' ?> Yii::$app->request->isAjax ? '' : 'box box-primary' ?>">
+<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form mdl-cell mdl-cell--12-col">
     <div class="mdl-card mdl-shadow--2dp">
         <div class="mdl-card__supporting-text">
 
@@ -34,7 +34,7 @@ use <?= ltrim($generator->modelClass, '\\').";\n" ?>
         <div class="mdl-grid">
 <?php foreach ($generator->getColumnNames() as $attribute) {
     if (in_array($attribute, $safeAttributes)) {
-        echo "\t\t\t\t\t\t<?= Html::cell(" . $generator->generateActiveField($attribute) . ", 'mdl-cell--4-col mdl-cell--2-col-phone') ?>\n\n";
+        echo "\t\t\t\t<?= Html::cell(" . $generator->generateActiveField($attribute) . ", 'mdl-cell--4-col mdl-cell--2-col-phone') ?>\n\n";
     }
 } ?>
         </div>
