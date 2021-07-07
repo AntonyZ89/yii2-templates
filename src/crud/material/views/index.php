@@ -67,7 +67,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
             'hover' => true,
             'toolbar' => [
                 [
-                    'content' => Html::a('<i class="material-icons">restart_alt</i> ' . Yii::t('kvgrid', 'Reset Grid'), [''], [
+                    'content' => Html::a(Html::icon('restart_alt') . ' ' . Yii::t('kvgrid', 'Reset Grid'), [''], [
                         'class' => Html::BUTTON_CLASS . ' ' . Html::BUTTON_COLORS['white'],
                         'title' => Yii::t('kvgrid', 'Reset Grid'),
                         'data-pjax' => 0
@@ -80,7 +80,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
                 ])
             ],
             'panel' => [
-                'before' => Html::a('<i class="material-icons">add</i> ' . <?= $generator->generateString('Create ' . Inflector::camel2words($basename)) ?>, ['create'], ['class' => Html::BUTTON_CLASS . ' ' . Html::BUTTON_COLORS['green']<?= $generator->enablePjax ? ", 'data-pjax' => 0" : '' ?>]),
+                'before' => Html::a(Html::icon('add') . ' ' . <?= $generator->generateString('Create ' . Inflector::camel2words($basename)) ?>, ['create'], ['class' => Html::BUTTON_CLASS . ' ' . Html::BUTTON_COLORS['green']<?= $generator->enablePjax ? ", 'data-pjax' => 0" : '' ?>]),
             ],
             'layout' => "{items}\n{summary}\n{pager}",
             'columns' => ArrayHelper::merge($columns, [
