@@ -255,11 +255,9 @@ if (!function_exists('extension_of')) {
     {
         switch ($file) {
             case (bool)preg_match('/(doc|docx)$/i', $file):
-                return 'doc';
             case (bool)preg_match('/(xls|xlsx)$/i', $file) :
-                return 'xls';
             case (bool)preg_match('/(ppt|pptx)$/i', $file):
-                return 'ppt';
+                return 'office';
             case (bool)preg_match('/(zip|rar|tar|gzip|gz|7z)$/i', $file):
                 return 'zip';
             case (bool)preg_match('/(pdf)$/i', $file):
@@ -273,7 +271,7 @@ if (!function_exists('extension_of')) {
             case (bool)preg_match('/(mp3|wav)$/i', $file) :
                 return 'mp3';
             default:
-                return null;
+                return 'image';
         }
     }
 }
