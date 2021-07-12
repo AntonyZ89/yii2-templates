@@ -241,3 +241,39 @@ if (!function_exists('api_error')) {
         ];
     }
 }
+
+if (!function_exists('extension_of')) {
+    /**
+     * returns file type
+     * To be used with FileInput
+     * `pluginOptions` => `initialPreviewConfig` => ['type' => extension_of($model->file)]
+     *
+     * @param $file
+     * @return string|null
+     */
+    function extension_of($file)
+    {
+        switch ($file) {
+            case (bool)preg_match('/(doc|docx)$/i', $file):
+                return 'doc';
+            case (bool)preg_match('/(xls|xlsx)$/i', $file) :
+                return 'xls';
+            case (bool)preg_match('/(ppt|pptx)$/i', $file):
+                return 'ppt';
+            case (bool)preg_match('/(zip|rar|tar|gzip|gz|7z)$/i', $file):
+                return 'zip';
+            case (bool)preg_match('/(pdf)$/i', $file):
+                return 'pdf';
+            case (bool)preg_match('/(htm|html)$/i', $file) :
+                return 'htm';
+            case (bool)preg_match('/(txt|ini|csv|java|php|js|css)$/i', $file):
+                return 'txt';
+            case (bool)preg_match('/(avi|mpg|mkv|mov|mp4|3gp|webm|wmv)$/i', $file):
+                return 'mov';
+            case (bool)preg_match('/(mp3|wav)$/i', $file) :
+                return 'mp3';
+            default:
+                return null;
+        }
+    }
+}
