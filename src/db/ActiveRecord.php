@@ -28,9 +28,13 @@ class ActiveRecord extends ActiveRecordBase
                 return $this->$name !== null ? $this->{'list' . ucfirst($name)}()[$this->$name] : null;
             }
 
-            throw new UnknownPropertyException($e->getMessage(), $e->getCode(), $e);
+            if (str_ends_with($name, 'AsCurrency')) {
+                $name = str_replace('AsCurrency', '', $name);
 
-            // TODO asCurrency
+                return \Yii::$app->formatter->asCurrency($this->$name ?? 0);
+            }
+
+            throw new UnknownPropertyException($e->getMessage(), $e->getCode(), $e);
         }
     }
 }
