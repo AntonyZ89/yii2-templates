@@ -3,11 +3,14 @@
 
 namespace antonyz89\templates\helpers;
 
+
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
 class Html extends \yii\helpers\Html
 {
+    public const DEFAULT_ROW = 'row gx-2';
+
     /**
      * @inheritDoc
      * @param string|array $content the content to be enclosed between the start and end tags. It will not be HTML-encoded.
@@ -105,12 +108,28 @@ class Html extends \yii\helpers\Html
     public static function row($content, $options = [])
     {
         if (empty($options)) {
-            $options['class'] = 'row';
+            $options['class'] = self::DEFAULT_ROW;
         } elseif (is_string($options)) {
-            $options = ['class' => 'row ' . $options];
+            $options = ['class' => self::DEFAULT_ROW . ' ' . $options];
         }
 
         return static::tag('div', $content, $options);
+    }
+
+    public static function beginRow($options = [])
+    {
+        if (is_array($options)) {
+            $options['class'] = self::DEFAULT_ROW . ' ' . ArrayHelper::getValue($options, 'class');
+        } else {
+            $options = ['class' => self::DEFAULT_ROW . ' ' . $options];
+        }
+
+        return self::beginTag('div', $options);
+    }
+
+    public static function endRow()
+    {
+        return self::endTag('div');
     }
 
     /**
@@ -122,10 +141,64 @@ class Html extends \yii\helpers\Html
         if (empty($options)) {
             $options['class'] = 'col-md-12';
         } elseif (is_string($options)) {
-            $size = $options;
-            $options = ['class' => "col-md-$size"];
+            $options = ['class' => $options];
         }
 
         return static::tag('div', $content, $options);
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @param array|string $options
+     */
+    public static function beginTag($name, $options = [])
+    {
+        if ($name === null || $name === false) {
+            return '';
+        }
+
+        if (is_string($options)) {
+            $options = ['class' => $options];
+        }
+
+        return "<$name" . static::renderTagAttributes($options) . '>';
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @param string $content
+     * @param array|string $options
+     * @return string
+     */
+    public static function button($content = 'Button', $options = [])
+    {
+        if (is_string($options)) {
+            $options = ['class' => $options];
+        }
+        if (!isset($options['class'])) {
+            $options['class'] = '';
+        }
+
+        $options['class'] .= ' btn';
+        return parent::button($content, $options);
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @param string $content
+     * @param string|array $options
+     * @return string
+     */
+    public static function submitButton($content = 'Submit', $options = [])
+    {
+        if (is_string($options)) {
+            $options = ['class' => $options];
+        }
+
+        $options['type'] = 'submit';
+        return static::button($content, $options);
     }
 }
