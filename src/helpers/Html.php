@@ -9,7 +9,8 @@ use yii\helpers\Url;
 
 class Html extends \yii\helpers\Html
 {
-    public const DEFAULT_ROW = 'row gx-2';
+    public const DEFAULT_ROW = 'row';
+    public const DEFAULT_BUTTON = 'btn';
 
     /**
      * @inheritDoc
@@ -107,22 +108,26 @@ class Html extends \yii\helpers\Html
      */
     public static function row($content, $options = [])
     {
-        if (empty($options)) {
-            $options['class'] = self::DEFAULT_ROW;
-        } elseif (is_string($options)) {
-            $options = ['class' => self::DEFAULT_ROW . ' ' . $options];
+        if (is_string($options)) {
+            $options = ['class' => $options];
+        } else if (!isset($options['class'])) {
+            $options['class'] = '';
         }
+
+        $options['class'] .= ' ' . self::DEFAULT_ROW;
 
         return static::tag('div', $content, $options);
     }
 
     public static function beginRow($options = [])
     {
-        if (is_array($options)) {
-            $options['class'] = self::DEFAULT_ROW . ' ' . ArrayHelper::getValue($options, 'class');
-        } else {
-            $options = ['class' => self::DEFAULT_ROW . ' ' . $options];
+        if (is_string($options)) {
+            $options = ['class' => $options];
+        } else if (!isset($options['class'])) {
+            $options['class'] = '';
         }
+
+        $options['class'] .= ' ' . self::DEFAULT_ROW;
 
         return self::beginTag('div', $options);
     }
@@ -176,12 +181,11 @@ class Html extends \yii\helpers\Html
     {
         if (is_string($options)) {
             $options = ['class' => $options];
-        }
-        if (!isset($options['class'])) {
+        } else if (!isset($options['class'])) {
             $options['class'] = '';
         }
 
-        $options['class'] .= ' btn';
+        $options['class'] .= ' ' . self::DEFAULT_BUTTON;
         return parent::button($content, $options);
     }
 
