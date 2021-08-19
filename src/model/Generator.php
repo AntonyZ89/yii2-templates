@@ -35,9 +35,11 @@ class Generator extends GeneratorBase
             if ($column->autoIncrement) {
                 continue;
             }
-            if ($column->allowNull && $column->defaultValue === null && !in_array($column->name, ['created_at', 'updated_at'])) {
+
+            if (!$column->allowNull && $column->defaultValue === null && !in_array($column->name, ['created_at', 'updated_at'])) {
                 $types['required'][] = $column->name;
             }
+
             switch ($column->type) {
                 case Schema::TYPE_SMALLINT:
                 case Schema::TYPE_INTEGER:
@@ -71,6 +73,7 @@ class Generator extends GeneratorBase
         }
         $rules = [];
         $driverName = $this->getDbDriverName();
+
         foreach ($types as $type => $columns) {
             if ($driverName === 'pgsql' && $type === 'integer') {
                 $rules[] = "[['" . implode("', '", $columns) . "'], 'default', 'value' => null]";
