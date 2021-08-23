@@ -16,6 +16,11 @@ class Html extends \yii\helpers\Html
     public const DEFAULT_ROW = 'row';
     public const DEFAULT_BUTTON = 'btn';
 
+    public const ICON_TYPE_MATERIAL = ' material-icons ';
+    public const ICON_TYPE_FONTAWESOME = ' fas fa-';
+
+    public const DEFAULT_ICON_TYPE = self::ICON_TYPE_FONTAWESOME;
+
     /**
      * @inheritDoc
      * @param string|array $content the content to be enclosed between the start and end tags. It will not be HTML-encoded.
@@ -72,18 +77,31 @@ class Html extends \yii\helpers\Html
      */
     public static function icon(string $name, $options = []): string
     {
+        $value = null;
+
         if (is_array($options)) {
-            $options['class'] = ArrayHelper::getValue($options, 'class') . ' fas fa-' . $name;
+            $options['class'] = ArrayHelper::getValue($options, 'class', '');
         } else {
             $options = [
-                'class' => $options . ' fas fa-' . $name
+                'class' => $options
             ];
         }
 
-        $tag = ArrayHelper::getValue($options, 'tag', 'i');
-        unset($options['tag']);
+        $type = ArrayHelper::remove($options, 'type', static::DEFAULT_ICON_TYPE);
+        $tag = ArrayHelper::remove($options, 'tag', 'i');
+        
+        $options['class'] .= $type;
 
-        return static::tag($tag, null, $options);
+        switch ($type) {
+            case static::ICON_TYPE_FONTAWESOME:
+                $options['class'] .= $name;
+                break;
+            case static::ICON_TYPE_MATERIAL:
+                $value = $name;
+                break;
+        }
+
+        return static::tag($tag, $value, $options);
     }
 
     /**
