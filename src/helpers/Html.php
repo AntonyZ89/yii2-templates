@@ -3,10 +3,14 @@
 
 namespace antonyz89\templates\helpers;
 
-
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
+/**
+ * Html
+ * 
+ * @author Antony Gabriel <antonyz.dev@gmail.com>
+ */
 class Html extends \yii\helpers\Html
 {
     public const DEFAULT_ROW = 'row';
@@ -27,10 +31,10 @@ class Html extends \yii\helpers\Html
                 if (is_string($key)) {
                     if (is_array($value)) {
                         foreach ($value as $item) {
-                            $_content .= self::tag('div', $item, $key);
+                            $_content .= static::tag('div', $item, $key);
                         }
                     } else {
-                        $_content .= self::tag('div', $value, $key);
+                        $_content .= static::tag('div', $value, $key);
                     }
                 } else {
                     $_content .= $value;
@@ -79,7 +83,7 @@ class Html extends \yii\helpers\Html
         $tag = ArrayHelper::getValue($options, 'tag', 'i');
         unset($options['tag']);
 
-        return self::tag($tag, null, $options);
+        return static::tag($tag, null, $options);
     }
 
     /**
@@ -114,7 +118,7 @@ class Html extends \yii\helpers\Html
             $options['class'] = '';
         }
 
-        $options['class'] .= ' ' . self::DEFAULT_ROW;
+        $options['class'] .= ' ' . static::DEFAULT_ROW;
 
         return static::tag('div', $content, $options);
     }
@@ -127,14 +131,14 @@ class Html extends \yii\helpers\Html
             $options['class'] = '';
         }
 
-        $options['class'] .= ' ' . self::DEFAULT_ROW;
+        $options['class'] .= ' ' . static::DEFAULT_ROW;
 
-        return self::beginTag('div', $options);
+        echo static::beginTag('div', $options);
     }
 
     public static function endRow()
     {
-        return self::endTag('div');
+        echo static::endTag('div');
     }
 
     /**
@@ -185,7 +189,7 @@ class Html extends \yii\helpers\Html
             $options['class'] = '';
         }
 
-        $options['class'] .= ' ' . self::DEFAULT_BUTTON;
+        $options['class'] .= ' ' . static::DEFAULT_BUTTON;
         return parent::button($content, $options);
     }
 
