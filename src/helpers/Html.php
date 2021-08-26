@@ -13,7 +13,7 @@ use yii\helpers\Url;
  */
 class Html extends \yii\helpers\Html
 {
-    public const DEFAULT_ROW = 'row';
+    public const DEFAULT_ROW = '';
     public const DEFAULT_BUTTON = 'btn';
 
     public const ICON_TYPE_MATERIAL = ' material-icons ';
@@ -89,7 +89,7 @@ class Html extends \yii\helpers\Html
 
         $type = ArrayHelper::remove($options, 'type', static::DEFAULT_ICON_TYPE);
         $tag = ArrayHelper::remove($options, 'tag', 'i');
-        
+
         $options['class'] .= $type;
 
         switch ($type) {
@@ -133,10 +133,10 @@ class Html extends \yii\helpers\Html
         if (is_string($options)) {
             $options = ['class' => $options];
         } else if (!isset($options['class'])) {
-            $options['class'] = '';
+            $options['class'] = static::DEFAULT_ROW;
         }
 
-        $options['class'] .= ' ' . static::DEFAULT_ROW;
+        $options['class'] .= ' row';
 
         return static::tag('div', $content, $options);
     }
@@ -146,10 +146,10 @@ class Html extends \yii\helpers\Html
         if (is_string($options)) {
             $options = ['class' => $options];
         } else if (!isset($options['class'])) {
-            $options['class'] = '';
+            $options['class'] = static::DEFAULT_ROW;
         }
 
-        $options['class'] .= ' ' . static::DEFAULT_ROW;
+        $options['class'] .= ' row';
 
         echo static::beginTag('div', $options);
     }
