@@ -87,7 +87,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
             ],
             'columns' => ArrayHelper::merge($columns, [
                 [
-                    'class' => 'kartik\grid\ActionColumn',
+                    'class' => ActionColumn::class,
                     'width' => '120px',
                     'visibleButtons' => [
                         'view' => false
