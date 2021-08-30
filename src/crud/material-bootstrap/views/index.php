@@ -56,9 +56,11 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
             'dataProvider' => $dataProvider,
             <?php if ($generator->enablePjax): ?>
                 'pjax' => true,
-                'pjaxSettings' => [ // kartik' GridView's pjax options
-                    'options' => [ // Yii2 Pjax's options
-                        'data-target' => '<?= $camel2id ?>-search-drawer'
+                'pjaxSettings' => [
+                    'options' => [ // kartik' GridView's pjax options
+                        'options' => [ // Yii2 Pjax's options
+                            'data-target' => '<?= $camel2id ?>-search-drawer'
+                        ]
                     ]
                 ],
             <?php endif; ?>
