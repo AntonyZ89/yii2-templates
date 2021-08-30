@@ -29,17 +29,22 @@ use antonyz89\mdb\widgets\form\ActiveForm;
         <?php endif; ?>
         ]); ?>
 
+        <?= "<?php " ?>Html::beginRow() ?>
+        
         <?php
         foreach ($generator->getColumnNames() as $attribute) {
-            echo "    <?= " . $generator->generateActiveSearchField($attribute) . " ?>\n\n";
+            echo "    <?= Html::col(" . $generator->generateActiveSearchField($attribute) . ") ?>\n\n";
         }
         ?>
+
+        <?= "<?php " ?>Html::endRow() ?>
+
         <?php if (!$generator->enablePjax) : ?>
             <div class="form-group flex-end">
                 <?= "<?= " ?>Html::submitButton(<?= $generator->generateString('Search') ?>, ['class' => 'btn-primary']) ?>
                 <?= "<?= " ?>Html::a(<?= $generator->generateString('Reset') ?>, ['index'], ['class' => 'btn-default']) ?>
             </div>
-
+            
         <?php endif; ?>
         <?= "<?php " ?>ActiveForm::end(); ?>
     </div>

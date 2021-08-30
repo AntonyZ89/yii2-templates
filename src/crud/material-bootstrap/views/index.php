@@ -14,9 +14,13 @@ $camel2id = Inflector::camel2id($basename);
 echo "<?php\n";
 ?>
 
-use yii\helpers\Html;
-use <?= $generator->indexWidgetType === 'grid' ? "kartik\\grid\\GridView" : "yii\\widgets\\ListView" ?>;
-<?= $generator->enablePjax ? 'use yii\widgets\Pjax;' : '' ?>
+use antonyz89\mdb\helpers\Html;
+use <?= $generator->indexWidgetType === 'grid' ? "antonyz89\\mdb\\widgets\\grid\\GridView" : "yii\\widgets\\ListView" ?>;
+<?php // $generator->enablePjax ? 'use yii\widgets\Pjax;' : '' ?>
+use antonyz89\mdb\widgets\grid\ActionColumn;
+use kartik\export\ExportMenu;
+use yii\helpers\ArrayHelper;
+
 
 /* @var $this yii\web\View */
 <?= !empty($generator->searchModelClass) ? "/* @var \$searchModel " . ltrim($generator->searchModelClass, '\\') . " */\n" : '' ?>
@@ -44,7 +48,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
 ?>
 
 <?php if(!empty($generator->searchModelClass)): ?>
-    <?= "<?php " . ($generator->indexWidgetType === 'grid' ? "// " : "") ?>echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?= "<?php " ?>echo $this->render('_search', ['model' => $searchModel]); ?>
 <?php endif; ?>
 <div class="<?= $camel2id ?>-index">
 <?php if ($generator->indexWidgetType === 'grid'): ?>
@@ -56,7 +60,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
                     'options' => [ // Yii2 Pjax's options
                         'data-target' => '<?= $camel2id ?>-search-drawer'
                     ]
-                ]
+                ],
             <?php endif; ?>
             'drawer' => '<?= $camel2id ?>-search-drawer',
             'summary' => false,
