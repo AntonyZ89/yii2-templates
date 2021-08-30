@@ -29,7 +29,7 @@ use antonyz89\mdb\widgets\form\ActiveForm;
         <?php endif; ?>
         ]); ?>
 
-        <?= "<?php " ?>Html::beginRow() ?>
+        <?= "<?php " ?>Html::beginRow('m-0') ?>
         
         <?php
         foreach ($generator->getColumnNames() as $attribute) {
