@@ -227,4 +227,17 @@ class Html extends \yii\helpers\Html
         $options['type'] = 'submit';
         return static::button($content, $options);
     }
+
+    /**
+     * @inheritDoc
+     * @param string|array $options
+     */
+    public static function img($src, $options = [])
+    {
+        if (is_string($options)) {
+            $options = ['class' => $options];
+        }
+
+        return parent::img($src, $options);
+    }
 }
