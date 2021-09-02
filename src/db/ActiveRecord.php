@@ -51,7 +51,7 @@ class ActiveRecord extends ActiveRecordBase
 
     public function findVariable(string $variable)
     {
-        if ($this->hasAttribute($variable)) {
+        if ($this->hasAttribute($variable) || $this->hasProperty($variable)) {
             return $variable;
         } else {
             return Inflector::camel2id($variable, '_', true);
