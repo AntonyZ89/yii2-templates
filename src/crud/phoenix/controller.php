@@ -41,6 +41,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\db\StaleObjectException;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
+use yii\web\Response;
 
 /**
  * <?= $controllerClass ?> implements the CRUD actions for <?= $modelClass ?> model.
@@ -62,7 +64,8 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
                             'view',
                             'create',
                             'update',
-                            'delete'
+                            'delete',
+                            'search',
                         ],
                         'allow' => true,
                         'roles' => ['@'],
@@ -168,6 +171,26 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
         $this->findModel(<?= $actionParams ?>)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * @param string $q
+     * @return array
+     */
+    public function actionSearch($q = null)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        $query = <?= $modelClass ?>::find()->search($q);
+
+        $results = ArrayHelper::getColumn($query->limit(10)->all(), static function (<?= $modelClass ?> $model) {
+            return [
+                'id' => $model->id,
+                'text' => (string)$model
+            ];
+        });
+
+        return ['results' => $results];
     }
 
     /**

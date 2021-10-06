@@ -19,6 +19,7 @@ use <?= $generator->indexWidgetType === 'grid' ? "common\\widgets\\grid\\GridVie
 <?php // $generator->enablePjax ? 'use yii\widgets\Pjax;' : '' ?>
 use common\widgets\grid\ActionColumn;
 use yii\helpers\ArrayHelper;
+use common\helpers\FieldHelper;
 
 
 /* @var $this yii\web\View */
