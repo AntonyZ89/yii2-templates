@@ -65,8 +65,6 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
                 ],
             <?php endif; ?>
             'drawer' => '<?= $camel2id ?>-search-drawer',
-            'summary' => false,
-            'responsive' => true,
             'hover' => true,
             'toolbar' => [
                 [
