@@ -15,6 +15,7 @@ class Html extends \yii\helpers\Html
 {
     public const DEFAULT_ROW = '';
     public const DEFAULT_BUTTON = 'btn';
+    public const DEFAULT_INPUT = 'form-control';
 
     public const ICON_TYPE_MATERIAL = ' material-icons ';
     public const ICON_TYPE_FONTAWESOME = ' fas fa-';
@@ -62,11 +63,25 @@ class Html extends \yii\helpers\Html
      */
     public static function textInput($name, $value = null, $options = [])
     {
+        return static::input('text', $name, $value, $options);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function input($type, $name = null, $value = null, $options = [])
+    {
         if (is_string($options)) {
             $options = ['class' => $options];
+        } else if (!isset($options['class'])) {
+            $options['class'] = static::DEFAULT_INPUT;
         }
 
-        return static::input('text', $name, $value, $options);
+        if (!isset($options['id'])) {
+            $options['id'] = $name;
+        }
+
+        return parent::input($type, $name, $value, $options);
     }
 
     /**
