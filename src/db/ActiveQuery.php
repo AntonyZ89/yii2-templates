@@ -20,7 +20,7 @@ class ActiveQuery extends ActiveQueryBase
      */
     public function get_alias()
     {
-        return $this->__alias ??= ArrayHelper::last($this->getTableNameAndAlias());
+        return $this->__alias ?? ($this->__alias = ArrayHelper::last($this->getTableNameAndAlias()));
     }
 
     /**
