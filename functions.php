@@ -274,4 +274,22 @@ if (!function_exists('extension_of')) {
                 return 'image';
         }
     }
+
+    
+if (!function_exists('truncate')) {
+    /**
+     * @example truncate(-1.49999, 2); // returns -1.49
+     * @example truncate(.49999, 3); // returns 0.499
+     * @param float $val
+     * @param int f
+     * @return float
+     */
+    function truncate($val, $f = 2)
+    {
+        if (($p = strpos($val, '.')) !== false) {
+            $val = floatval(substr($val, 0, $p + 1 + $f));
+        }
+        return $val;
+    }
+}
 }

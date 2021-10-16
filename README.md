@@ -49,7 +49,8 @@ if (!YII_ENV_TEST) {
                 'class' => 'antonyz89\templates\crud\Generator',
                 'templates' => [
                     'admin-lte' => '@antonyz89/templates/crud/admin-lte', // add admin-lte template
-                    'material' => '@antonyz89/templates/crud/material', // add material template
+                    'material-lite' => '@antonyz89/templates/crud/material-lite', // add material-lite template
+                    'material-bootstrap' => '@antonyz89/templates/crud/material-bootstrap', // add material-bootstrap template
                     'default' => '@antonyz89/templates/crud/default', // add default template
                 ]
             ]
