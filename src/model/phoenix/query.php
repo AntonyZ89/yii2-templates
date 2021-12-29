@@ -36,8 +36,7 @@ echo "<?php\n";
 
 namespace <?= $generator->queryNs ?>;
 
-use antonyz89\templates\db\ActiveQuery;
-use yii2tech\ar\softdelete\SoftDeleteQueryBehavior;
+use common\base\ActiveQuery;
 
 /**
  * This is the ActiveQuery class for [[<?= $modelFullClassName ?>]].
@@ -46,24 +45,6 @@ use yii2tech\ar\softdelete\SoftDeleteQueryBehavior;
  */
 class <?= $className ?> extends ActiveQuery
 {
-
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'softDelete' => [
-                'class' => SoftDeleteQueryBehavior::class,
-                'deletedCondition' => [
-                    'IS NOT', 'deleted_at', null,
-                ],
-                'notDeletedCondition' => [
-                    'IS', 'deleted_at', null,
-                ],
-            ],
-        ];
-    }
 
     /**
      * {@inheritdoc}

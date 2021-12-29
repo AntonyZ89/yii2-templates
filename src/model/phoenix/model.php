@@ -42,6 +42,8 @@ namespace <?= $generator->ns ?>;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii2tech\ar\softdelete\SoftDeleteBehavior;
+use common\base\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "<?= $generator->generateTableName($tableName) ?>".
@@ -56,7 +58,7 @@ use yii2tech\ar\softdelete\SoftDeleteBehavior;
 <?php endforeach; ?>
 <?php endif; ?>
  */
-class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . "\n" ?>
+class <?= $className ?> extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -81,30 +83,9 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
      */
     public function behaviors()
     {
-        return [
+        return ArrayHelper::merge(parent::behaviors(), [
             <?= $timestampBehavior . "\n" ?>
-            [
-                'class' => SoftDeleteBehavior::class,
-                'softDeleteAttributeValues' => [
-                    'deleted_at' => time()
-                ],
-                'replaceRegularDelete' => true, // mutate native `delete()` method
-                'allowDeleteCallback' => static function (self $model) {
-                    // TODO: if don't have any relation, allow hard delete
-
-                    /**
-                     * @example
-                     *
-                     * $establishmentsCount = $model->getEstablishments()->count();
-                     * $garagesCount = $model->getGarages()->count();
-                     * $regionsCount = $model->getRegions()->count();
-                     * $servicesCount = $model->getServices()->count();
-                     *
-                     * return !$establishmentsCount && !$garagesCount && !$regionsCount && !$servicesCount;
-                     */
-                }
-            ],
-        ];
+        ]);
     }
 
 
