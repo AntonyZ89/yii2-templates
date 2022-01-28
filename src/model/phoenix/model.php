@@ -41,7 +41,6 @@ namespace <?= $generator->ns ?>;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
-use yii2tech\ar\softdelete\SoftDeleteBehavior;
 use common\base\ActiveRecord;
 use yii\helpers\ArrayHelper;
 
@@ -131,9 +130,7 @@ class <?= $className ?> extends ActiveRecord
      */
     public static function find()
     {
-        $query = new <?= $queryClassFullName ?>(get_called_class());
-
-        return $query->notDeleted();
+        return new <?= $queryClassFullName ?>(get_called_class());
     }
 <?php endif; ?>
 }
