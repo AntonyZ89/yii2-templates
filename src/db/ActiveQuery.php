@@ -50,6 +50,22 @@ class ActiveQuery extends ActiveQueryBase
     }
 
     /**
+     * {@inheritdoc}
+     * @return $this
+     */
+    public function andOnCondition($condition, $params = []) {
+        return parent::andOnCondition($this->putAlias($condition), $params);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return $this
+     */
+    public function orOnCondition($condition, $params = []) {
+        return parent::orOnCondition($this->putAlias($condition), $params);
+    }
+
+    /**
      * {@inheritDoc}
      * @return $this
      */
