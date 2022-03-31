@@ -166,7 +166,7 @@ class ActiveQuery extends ActiveQueryBase
     }
 
     /**
-     * @param string|array $params
+     * @param string|Expression|array $params
      * @return array
      */
     protected function putAlias($params)
@@ -176,6 +176,13 @@ class ActiveQuery extends ActiveQueryBase
         }
 
         $_params = [];
+
+        if ($params instanceof Expression) {
+            return new Expression(
+                str_replace('@alias', $this->_alias, $params->expression),
+                $params->params
+            );
+        }
 
         foreach ($params as $column => $value) {
             if (is_string($column)) {
