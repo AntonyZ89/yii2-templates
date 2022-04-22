@@ -3,6 +3,7 @@
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
+
 /* @var $this yii\web\View */
 /* @var $generator antonyz89\templates\crud\Generator */
 
@@ -20,7 +21,8 @@ use <?= $generator->indexWidgetType === 'grid' ? "common\\widgets\\grid\\GridVie
 use common\widgets\grid\ActionColumn;
 use yii\helpers\ArrayHelper;
 use common\helpers\FieldHelper;
-
+use common\components\HeaderGridView;
+use antonyz89\togglecolumn\ToggleColumn;
 
 /* @var $this yii\web\View */
 <?= !empty($generator->searchModelClass) ? "/* @var \$searchModel " . ltrim($generator->searchModelClass, '\\') . " */\n" : '' ?>
@@ -54,46 +56,16 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
 <?php if ($generator->indexWidgetType === 'grid'): ?>
     <?= "<?= " ?>GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterSelector' => '#<?= strtolower($basename) ?>search-search',
-        'toolbar' => [
-            [
-                'content' => Html::tag('div', [
-                    Html::tag('span', Html::icon('search'), 'input-group-text'),
-                    Html::activeTextInput(
-                        $searchModel,
-                        'search',
-                        ArrayHelper::merge(
-                            ['class' => 'form-control border-start-0'],
-                            FieldHelper::addon(FieldHelper::DIRECTION_APPEND, Html::icon('lock'))
-                        )
-                    )
-                ] , 'input-group input-group-sm')
-            ],
-            [
-                'content' => Html::a(
-                    Html::icon('redo'),
-                    [''],
-                    [
-                        'class' => 'btn btn-floating btn-sm shadow-0',
-                        'data-mdb-toggle' => 'tooltip',
-                        'title' => Yii::t('app', 'Reset Grid'),
-                        'data-pjax' => 0
-                    ]
-                ),
-            ],
-            [
-                'content' => Html::a(
-                    Html::icon('plus'),
-                    ['create'],
-                    [
-                        'class' => 'btn btn-floating btn-success btn-sm shadow-0',
-                        'data-pjax' => 0,
-                    ]
-                )
-            ]
-        ],
+        'toolbar' => [],
         'panel' => [
-            'before' => "<h5>$this->title</h5>",
+            'before' => HeaderGridView::widget([
+                'toggle' => ToggleColumn::widget([
+                    'model' => <?= $generator->modelClass ?>::class,
+                    'columns' => $columns,
+                    'selectedColumns' => [throw new \Exception('Insert selected columns')],
+                ]),
+                'model' => $searchModel,
+            ])
         ],
         'columns' => ArrayHelper::merge($columns, [
             [

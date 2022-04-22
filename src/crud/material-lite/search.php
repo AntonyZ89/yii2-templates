@@ -35,6 +35,10 @@ use <?= ltrim($generator->modelClass, '\\') . (isset($modelAlias) ? " as $modelA
 class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $modelClass ?>
 
 {
+
+    /** @var string */
+    public $search;
+
     /**
      * @inheritdoc
      */
@@ -42,6 +46,7 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
     {
         return [
             <?= implode(",\n            ", $rules) ?>,
+            [['search'], 'string']
         ];
     }
 
@@ -81,6 +86,16 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
 
         // grid filtering conditions
         <?= implode("\n        ", $searchConditions) ?>
+
+        $query->andFilterWhere([
+            'OR',
+            <?= implode(
+                "\n\t\t\t",
+                array_map(static function ($value) {
+                    return "['like', '@alias.$value', \$this->search],";
+                }, $generator->columnNames)
+            ) . "\n" ?>
+        ]);
 
         return $dataProvider;
     }
