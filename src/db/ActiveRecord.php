@@ -16,6 +16,9 @@ use yii\helpers\Inflector;
  */
 class ActiveRecord extends ActiveRecordBase
 {
+
+    protected $_formName;
+
     /**
      * @inheritDoc
      * @throws UnknownPropertyException
@@ -56,5 +59,13 @@ class ActiveRecord extends ActiveRecordBase
         } else {
             return Inflector::camel2id($variable, '_', true);
         }
+    }
+
+    public function formName() {
+        return $this->_formName ?? parent::formName();
+    }
+
+    public function setFormName($formName) {
+        $this->_formName = $formName;
     }
 }
