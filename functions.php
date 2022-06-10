@@ -146,8 +146,8 @@ if (!function_exists('array_some')) {
      */
     function array_some(array $array, callable $fn)
     {
-        foreach ($array as $value) {
-            if ($fn($value)) {
+        foreach ($array as $index => $value) {
+            if ($fn($value, $index)) {
                 return true;
             }
         }
@@ -255,41 +255,41 @@ if (!function_exists('extension_of')) {
     {
         switch ($file) {
             case (bool)preg_match('/(doc|docx)$/i', $file):
-            case (bool)preg_match('/(xls|xlsx)$/i', $file) :
+            case (bool)preg_match('/(xls|xlsx)$/i', $file):
             case (bool)preg_match('/(ppt|pptx)$/i', $file):
                 return 'office';
             case (bool)preg_match('/(zip|rar|tar|gzip|gz|7z)$/i', $file):
                 return 'zip';
             case (bool)preg_match('/(pdf)$/i', $file):
                 return 'pdf';
-            case (bool)preg_match('/(htm|html)$/i', $file) :
+            case (bool)preg_match('/(htm|html)$/i', $file):
                 return 'htm';
             case (bool)preg_match('/(txt|ini|csv|java|php|js|css)$/i', $file):
                 return 'txt';
             case (bool)preg_match('/(avi|mpg|mkv|mov|mp4|3gp|webm|wmv)$/i', $file):
                 return 'mov';
-            case (bool)preg_match('/(mp3|wav)$/i', $file) :
+            case (bool)preg_match('/(mp3|wav)$/i', $file):
                 return 'mp3';
             default:
                 return 'image';
         }
     }
 
-    
-if (!function_exists('truncate')) {
-    /**
-     * @example truncate(-1.49999, 2); // returns -1.49
-     * @example truncate(.49999, 3); // returns 0.499
-     * @param float $val
-     * @param int f
-     * @return float
-     */
-    function truncate($val, $f = 2)
-    {
-        if (($p = strpos($val, '.')) !== false) {
-            $val = floatval(substr($val, 0, $p + 1 + $f));
+
+    if (!function_exists('truncate')) {
+        /**
+         * @example truncate(-1.49999, 2); // returns -1.49
+         * @example truncate(.49999, 3); // returns 0.499
+         * @param float $val
+         * @param int f
+         * @return float
+         */
+        function truncate($val, $f = 2)
+        {
+            if (($p = strpos($val, '.')) !== false) {
+                $val = floatval(substr($val, 0, $p + 1 + $f));
+            }
+            return $val;
         }
-        return $val;
     }
-}
 }
