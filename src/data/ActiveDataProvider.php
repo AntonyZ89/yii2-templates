@@ -20,6 +20,6 @@ class ActiveDataProvider extends BaseActiveDataProvider
         }
         $query = clone $this->query;
 
-        return (int) $query->limit(-1)->offset(-1)->orderBy([])->groupBy(false)->count('*', $this->db);
+        return (int) $query->limit(-1)->offset(-1)->orderBy([])->having([])->groupBy(false)->count('*', $this->db);
     }
 }
