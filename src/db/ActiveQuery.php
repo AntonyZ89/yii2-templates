@@ -12,15 +12,12 @@ use yii2mod\helpers\ArrayHelper;
  */
 class ActiveQuery extends ActiveQueryBase
 {
-    /** @var string|null */
-    private $__alias;
-
     /**
      * @return string
      */
     public function get_alias()
     {
-        return $this->__alias ?? ($this->__alias = ArrayHelper::last($this->getTableNameAndAlias()));
+        return ArrayHelper::last($this->getTableNameAndAlias());
     }
 
     /**
