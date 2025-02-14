@@ -5,7 +5,7 @@ namespace antonyz89\templates\db;
 use yii\db\ActiveQuery as ActiveQueryBase;
 use yii\db\Expression;
 use yii\db\ExpressionInterface;
-use yii2mod\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 
 /**
  * @property string $_alias
@@ -17,9 +17,27 @@ class ActiveQuery extends ActiveQueryBase
      */
     public function get_alias()
     {
-        return ArrayHelper::last($this->getTableNameAndAlias());
+        return self::last($this->getTableNameAndAlias());
     }
 
+    /**
+     * Return the last element in an array passing a given truth test.
+     *
+     * @param $array
+     * @param $callback
+     * @param null $default
+     *
+     * @return mixed
+     */
+    private static function last($array, $callback = null, $default = null)
+    {
+        if (is_null($callback)) {
+            return empty($array) ? ArrayHelper::value($default) : end($array);
+        }
+
+        return ArrayHelper::first(array_reverse($array), $callback, $default);
+    }
+    
     /**
      * @return static
      */
